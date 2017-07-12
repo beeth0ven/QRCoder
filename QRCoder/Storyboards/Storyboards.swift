@@ -13,9 +13,9 @@ extension IsInMainStoryBoard {
     static var storyboardName: String { return "Main" }
 }
 
-protocol IsInReadStoryBoard: IsInStoryboard {}
-extension IsInReadStoryBoard {
-    static var storyboardName: String { return "Read" }
+protocol IsInScanStoryBoard: IsInStoryboard {}
+extension IsInScanStoryBoard {
+    static var storyboardName: String { return "Scan" }
 }
 
 protocol IsInCreateStoryBoard: IsInStoryboard {}

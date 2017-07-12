@@ -27,10 +27,10 @@
             </objects>
             <point key="canvasLocation" x="119" y="263"/>
         </scene>
-        <!--ReadQRCodeViewController-->
+        <!--ScanQRCodeViewController-->
         <scene sceneID="Sd4-ON-Ql7">
             <objects>
-                <viewControllerPlaceholder storyboardName="Read" referencedIdentifier="ReadQRCodeViewController" id="3fh-4g-LzX" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="Scan" referencedIdentifier="ScanQRCodeViewController" id="3fh-4g-LzX" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="JAv-tt-KBn"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dZM-E2-41r" userLabel="First Responder" sceneMemberID="firstResponder"/>

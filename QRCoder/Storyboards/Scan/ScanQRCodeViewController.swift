@@ -1,5 +1,5 @@
 //
-//  ReadQRCodeViewController.swift
+//  ScanQRCodeViewController.swift
 //  QRCoder
 //
 //  Created by luojie on 2017/7/12.
@@ -11,7 +11,7 @@ import BNKit
 import RxSwift
 import RxCocoa
 
-class ReadQRCodeViewController: UIViewController, IsInReadStoryBoard {
+class ScanQRCodeViewController: UIViewController, IsInScanStoryBoard {
     
     @IBOutlet weak var getQRCodeView: GetQRCodeView!
     @IBOutlet weak var label: UILabel!

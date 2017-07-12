@@ -17,9 +17,9 @@
 		45DCDB361F160A0E00B70BCA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45DCDB341F1609D700B70BCA /* LaunchScreen.storyboard */; };
 		45DCDB381F160AA500B70BCA /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DCDB331F1609CD00B70BCA /* MainViewController.swift */; };
 		45DCDB3D1F160B1D00B70BCA /* Create.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45DCDB3C1F160B1D00B70BCA /* Create.storyboard */; };
-		45DCDB401F160B2C00B70BCA /* Read.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45DCDB3F1F160B2C00B70BCA /* Read.storyboard */; };
+		45DCDB401F160B2C00B70BCA /* Scan.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45DCDB3F1F160B2C00B70BCA /* Scan.storyboard */; };
 		45DCDB421F160B3C00B70BCA /* Storyboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DCDB411F160B3C00B70BCA /* Storyboards.swift */; };
-		45DCDB441F160C9C00B70BCA /* ReadQRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DCDB431F160C9C00B70BCA /* ReadQRCodeViewController.swift */; };
+		45DCDB441F160C9C00B70BCA /* ScanQRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DCDB431F160C9C00B70BCA /* ScanQRCodeViewController.swift */; };
 		45DCDB461F160CB900B70BCA /* CreateQRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DCDB451F160CB900B70BCA /* CreateQRCodeViewController.swift */; };
 		C4290F464230BB9B7F674AF7 /* Pods_QRCoder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE565DF5C356FB51B3A28A82 /* Pods_QRCoder.framework */; };
 /* End PBXBuildFile section */
@@ -62,9 +62,9 @@
 		45DCDB331F1609CD00B70BCA /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		45DCDB341F1609D700B70BCA /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		45DCDB3C1F160B1D00B70BCA /* Create.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Create.storyboard; sourceTree = "<group>"; };
-		45DCDB3F1F160B2C00B70BCA /* Read.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Read.storyboard; sourceTree = "<group>"; };
+		45DCDB3F1F160B2C00B70BCA /* Scan.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Scan.storyboard; sourceTree = "<group>"; };
 		45DCDB411F160B3C00B70BCA /* Storyboards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboards.swift; sourceTree = "<group>"; };
-		45DCDB431F160C9C00B70BCA /* ReadQRCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadQRCodeViewController.swift; sourceTree = "<group>"; };
+		45DCDB431F160C9C00B70BCA /* ScanQRCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanQRCodeViewController.swift; sourceTree = "<group>"; };
 		45DCDB451F160CB900B70BCA /* CreateQRCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateQRCodeViewController.swift; sourceTree = "<group>"; };
 		6AEBFB133E9B8CFF042C1888 /* Pods-QRCoder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QRCoder.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QRCoder/Pods-QRCoder.debug.xcconfig"; sourceTree = "<group>"; };
 		8CDCC9BDF42E818A2B992A57 /* Pods-QRCoder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QRCoder.release.xcconfig"; path = "Pods/Target Support Files/Pods-QRCoder/Pods-QRCoder.release.xcconfig"; sourceTree = "<group>"; };
@@ -147,7 +147,7 @@
 			children = (
 				45DCDB411F160B3C00B70BCA /* Storyboards.swift */,
 				45DCDB371F160A4100B70BCA /* Main */,
-				45DCDB3A1F160B0100B70BCA /* Read */,
+				45DCDB3A1F160B0100B70BCA /* Scan */,
 				45DCDB3B1F160B0800B70BCA /* Create */,
 			);
 			path = Storyboards;
@@ -162,13 +162,13 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
-		45DCDB3A1F160B0100B70BCA /* Read */ = {
+		45DCDB3A1F160B0100B70BCA /* Scan */ = {
 			isa = PBXGroup;
 			children = (
-				45DCDB3F1F160B2C00B70BCA /* Read.storyboard */,
-				45DCDB431F160C9C00B70BCA /* ReadQRCodeViewController.swift */,
+				45DCDB3F1F160B2C00B70BCA /* Scan.storyboard */,
+				45DCDB431F160C9C00B70BCA /* ScanQRCodeViewController.swift */,
 			);
-			path = Read;
+			path = Scan;
 			sourceTree = "<group>";
 		};
 		45DCDB3B1F160B0800B70BCA /* Create */ = {
@@ -303,7 +303,7 @@
 				45DCDB3D1F160B1D00B70BCA /* Create.storyboard in Resources */,
 				45DCDB361F160A0E00B70BCA /* LaunchScreen.storyboard in Resources */,
 				45DCDB351F160A0B00B70BCA /* Main.storyboard in Resources */,
-				45DCDB401F160B2C00B70BCA /* Read.storyboard in Resources */,
+				45DCDB401F160B2C00B70BCA /* Scan.storyboard in Resources */,
 				454C51C91F16011400853A00 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -430,7 +430,7 @@
 			files = (
 				45DCDB381F160AA500B70BCA /* MainViewController.swift in Sources */,
 				45DCDB421F160B3C00B70BCA /* Storyboards.swift in Sources */,
-				45DCDB441F160C9C00B70BCA /* ReadQRCodeViewController.swift in Sources */,
+				45DCDB441F160C9C00B70BCA /* ScanQRCodeViewController.swift in Sources */,
 				45DCDB461F160CB900B70BCA /* CreateQRCodeViewController.swift in Sources */,
 				454C51C21F16011400853A00 /* AppDelegate.swift in Sources */,
 			);

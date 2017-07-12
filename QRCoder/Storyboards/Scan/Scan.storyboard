@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Read-->
+        <!--Scan-->
         <scene sceneID="N57-Ve-h6X">
             <objects>
-                <viewController storyboardIdentifier="ReadQRCodeViewController" id="jmC-qU-oSX" customClass="ReadQRCodeViewController" customModule="QRCoder" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ScanQRCodeViewController" id="jmC-qU-oSX" customClass="ScanQRCodeViewController" customModule="QRCoder" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="WiT-Le-wq4"/>
                         <viewControllerLayoutGuide type="bottom" id="Dr1-14-0Y0"/>
@@ -44,7 +44,7 @@
                             <constraint firstItem="wqP-et-Vzj" firstAttribute="leading" secondItem="694-vk-29D" secondAttribute="leading" id="nMU-tS-lnS"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Read" id="A7M-x0-Ugc"/>
+                    <tabBarItem key="tabBarItem" title="Scan" id="A7M-x0-Ugc"/>
                     <connections>
                         <outlet property="getQRCodeView" destination="wqP-et-Vzj" id="sMh-h1-HHg"/>
                         <outlet property="label" destination="ds6-TG-f4b" id="X64-fR-krL"/>
