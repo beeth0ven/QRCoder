@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.19" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="9z1-mC-Kfj">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.16"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Create-->
+        <scene sceneID="Dk8-Kj-gcz">
+            <objects>
+                <viewController storyboardIdentifier="CreateQRCodeViewController" id="9z1-mC-Kfj" customClass="CreateQRCodeViewController" customModule="QRCoder" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="hzI-Eq-KTY"/>
+                        <viewControllerLayoutGuide type="bottom" id="J00-tp-Xe1"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="7Lg-yO-GAA">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4Mr-oB-6xR">
+                                <rect key="frame" x="67" y="213" width="240" height="240"/>
+                                <color key="backgroundColor" red="0.68888300660000001" green="0.71366006140000005" blue="0.73448425530000006" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="Avu-BB-xYI"/>
+                                    <constraint firstAttribute="width" secondItem="4Mr-oB-6xR" secondAttribute="height" multiplier="1:1" id="Xo4-8G-WOk"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="4Mr-oB-6xR" firstAttribute="centerY" secondItem="7Lg-yO-GAA" secondAttribute="centerY" id="OEQ-mI-SPv"/>
+                            <constraint firstItem="4Mr-oB-6xR" firstAttribute="centerX" secondItem="7Lg-yO-GAA" secondAttribute="centerX" id="ZbY-YH-iza"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Create" id="9f6-Cm-GOT"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="imageView" destination="4Mr-oB-6xR" id="cQo-nZ-UjP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CFc-hm-FSG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-199" y="157"/>
+        </scene>
+    </scenes>
+</document>

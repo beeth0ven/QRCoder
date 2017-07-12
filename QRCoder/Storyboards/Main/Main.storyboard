@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.19" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Lv2-JD-ZvY">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.16"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Tab Bar Controller-->
+        <scene sceneID="dir-fu-nt1">
+            <objects>
+                <tabBarController id="Lv2-JD-ZvY" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="aeC-Oa-yDp">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="3fh-4g-LzX" kind="relationship" relationship="viewControllers" id="8Wi-P5-BlT"/>
+                        <segue destination="RIM-TH-9qJ" kind="relationship" relationship="viewControllers" id="3iF-m7-eZh"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2PX-7t-qPG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="119" y="263"/>
+        </scene>
+        <!--ReadQRCodeViewController-->
+        <scene sceneID="Sd4-ON-Ql7">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Read" referencedIdentifier="ReadQRCodeViewController" id="3fh-4g-LzX" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="JAv-tt-KBn"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dZM-E2-41r" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="890" y="89"/>
+        </scene>
+        <!--CreateQRCodeViewController-->
+        <scene sceneID="yH2-qV-DUL">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Create" referencedIdentifier="CreateQRCodeViewController" id="RIM-TH-9qJ" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="T0q-VJ-bbQ"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EPx-Qa-fP8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="932" y="309"/>
+        </scene>
+    </scenes>
+</document>

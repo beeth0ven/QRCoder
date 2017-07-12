@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.19" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="jmC-qU-oSX">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.16"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Read-->
+        <scene sceneID="N57-Ve-h6X">
+            <objects>
+                <viewController storyboardIdentifier="ReadQRCodeViewController" id="jmC-qU-oSX" customClass="ReadQRCodeViewController" customModule="QRCoder" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="WiT-Le-wq4"/>
+                        <viewControllerLayoutGuide type="bottom" id="Dr1-14-0Y0"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="694-vk-29D">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wqP-et-Vzj" customClass="GetQRCodeView" customModule="BNKit">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="579"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ds6-TG-f4b">
+                                <rect key="frame" x="0.0" y="579" width="375" height="88"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="wqP-et-Vzj" secondAttribute="trailing" id="2X0-x0-ddk"/>
+                            <constraint firstItem="ds6-TG-f4b" firstAttribute="leading" secondItem="694-vk-29D" secondAttribute="leading" id="LhJ-XA-jho"/>
+                            <constraint firstAttribute="trailing" secondItem="ds6-TG-f4b" secondAttribute="trailing" id="Nwf-KJ-v6w"/>
+                            <constraint firstItem="wqP-et-Vzj" firstAttribute="top" secondItem="694-vk-29D" secondAttribute="top" id="U1r-7z-hwA"/>
+                            <constraint firstItem="Dr1-14-0Y0" firstAttribute="top" secondItem="wqP-et-Vzj" secondAttribute="bottom" constant="88" id="ast-5V-rqy"/>
+                            <constraint firstItem="ds6-TG-f4b" firstAttribute="top" secondItem="wqP-et-Vzj" secondAttribute="bottom" id="iLx-Sh-uNF"/>
+                            <constraint firstItem="Dr1-14-0Y0" firstAttribute="top" secondItem="ds6-TG-f4b" secondAttribute="bottom" id="mIQ-Ed-EyQ"/>
+                            <constraint firstItem="wqP-et-Vzj" firstAttribute="leading" secondItem="694-vk-29D" secondAttribute="leading" id="nMU-tS-lnS"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Read" id="A7M-x0-Ugc"/>
+                    <connections>
+                        <outlet property="getQRCodeView" destination="wqP-et-Vzj" id="sMh-h1-HHg"/>
+                        <outlet property="label" destination="ds6-TG-f4b" id="X64-fR-krL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KlD-zj-S5x" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="173.59999999999999" y="-209.14542728635683"/>
+        </scene>
+    </scenes>
+</document>
