@@ -8,6 +8,8 @@
 
 import UIKit
 import BNKit
+import RxSwift
+import RxCocoa
 
 class ReadQRCodeViewController: UIViewController, IsInReadStoryBoard {
     
@@ -18,6 +20,8 @@ class ReadQRCodeViewController: UIViewController, IsInReadStoryBoard {
         super.viewDidLoad()
         
         getQRCodeView.value
+            .debounce(0.3, scheduler: MainScheduler.instance)
+            .distinctUntilChanged()
             .bind(to: label.rx.text)
             .disposed(by: disposeBag)
     }
