@@ -26,3 +26,4 @@ class ScanQRCodeViewController: UIViewController, IsInScanStoryBoard {
             .disposed(by: disposeBag)
     }
 }
+
