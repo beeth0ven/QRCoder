@@ -1,11 +1,11 @@
-platform :ios, ’10.0’
+platform :ios, '10.0'
 use_frameworks!
 
 def shared
+    #    pod 'BNKit', :git => 'https://github.com/beeth0ven/BNKit.git', :commit => '8a46dc6'
     pod 'BNKit', :git => 'https://github.com/beeth0ven/BNKit.git', :branch => 'master'
     pod 'RxDataSources', '~> 1.0.0'
     pod 'Action'
-    #    pod 'BNKit', :git => 'https://github.com/beeth0ven/BNKit.git', :commit => '8a46dc6'
 end
 
 target 'Internal' do
@@ -13,6 +13,7 @@ target 'Internal' do
 end
 
 target 'QRCoder' do
+    pod 'GoogleMobileVision', '~> 1.1'
     shared
 end
 

@@ -10,6 +10,8 @@ import UIKit
 import BNKit
 import RxSwift
 import RxCocoa
+import GoogleMobileVision
+import GoogleMVDataOutput
 
 class ScanQRCodeViewController: UIViewController, IsInScanStoryBoard {
     
@@ -20,10 +22,16 @@ class ScanQRCodeViewController: UIViewController, IsInScanStoryBoard {
         super.viewDidLoad()
         
         getQRCodeView.value
-            .debounce(0.3, scheduler: MainScheduler.instance)
             .distinctUntilChanged()
             .bind(to: label.rx.text)
             .disposed(by: disposeBag)
+        
+//        let url = URL(string: "App-Prefs:root=WIFI")!
+//        
+//        if UIApplication.shared.canOpenURL(url){
+//            UIApplication.shared.open(url)
+//        }
     }
 }
+
 
