@@ -103,7 +103,7 @@
         <!--CreateQR Code View Controller-->
         <scene sceneID="Dk8-Kj-gcz">
             <objects>
-                <viewController storyboardIdentifier="CreateQRCodeViewController" id="9z1-mC-Kfj" customClass="CreateQRCodeViewController" customModule="QRCoder" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CreateQRCodeViewController" hidesBottomBarWhenPushed="YES" id="9z1-mC-Kfj" customClass="CreateQRCodeViewController" customModule="QRCoder" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hzI-Eq-KTY"/>
                         <viewControllerLayoutGuide type="bottom" id="J00-tp-Xe1"/>

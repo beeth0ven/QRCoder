@@ -6,6 +6,7 @@ def shared
     pod 'BNKit', :git => 'https://github.com/beeth0ven/BNKit.git', :branch => 'master'
     pod 'RxDataSources', '~> 1.0.0'
     pod 'Action'
+    pod 'RxRealm'
 end
 
 target 'Internal' do
@@ -13,7 +14,6 @@ target 'Internal' do
 end
 
 target 'QRCoder' do
-    pod 'GoogleMobileVision', '~> 1.1'
     shared
 end
 

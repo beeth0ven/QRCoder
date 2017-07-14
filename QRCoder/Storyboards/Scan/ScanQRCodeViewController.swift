@@ -10,8 +10,6 @@ import UIKit
 import BNKit
 import RxSwift
 import RxCocoa
-import GoogleMobileVision
-import GoogleMVDataOutput
 
 class ScanQRCodeViewController: UIViewController, IsInScanStoryBoard {
     
@@ -22,6 +20,7 @@ class ScanQRCodeViewController: UIViewController, IsInScanStoryBoard {
         
         getQRCodeView.value
             .distinctUntilChanged()
+            .delay(0.3, scheduler: MainScheduler.instance)
             .bind(to: rx.title)
             .disposed(by: disposeBag)
         
@@ -32,5 +31,4 @@ class ScanQRCodeViewController: UIViewController, IsInScanStoryBoard {
 //        }
     }
 }
-
 
