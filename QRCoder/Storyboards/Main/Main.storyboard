@@ -13,10 +13,11 @@
         <scene sceneID="dir-fu-nt1">
             <objects>
                 <tabBarController id="Lv2-JD-ZvY" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" id="aeC-Oa-yDp">
+                    <tabBar key="tabBar" contentMode="scaleToFill" translucent="NO" id="aeC-Oa-yDp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
                         <segue destination="3fh-4g-LzX" kind="relationship" relationship="viewControllers" id="8Wi-P5-BlT"/>
@@ -27,25 +28,25 @@
             </objects>
             <point key="canvasLocation" x="119" y="263"/>
         </scene>
-        <!--ScanQRCodeViewController-->
+        <!--Scan-->
         <scene sceneID="Sd4-ON-Ql7">
             <objects>
-                <viewControllerPlaceholder storyboardName="Scan" referencedIdentifier="ScanQRCodeViewController" id="3fh-4g-LzX" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="JAv-tt-KBn"/>
+                <viewControllerPlaceholder storyboardName="Scan" id="3fh-4g-LzX" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" systemItem="search" id="JAv-tt-KBn"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dZM-E2-41r" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="890" y="89"/>
+            <point key="canvasLocation" x="829" y="152"/>
         </scene>
-        <!--CreateQRCodeViewController-->
+        <!--Create-->
         <scene sceneID="yH2-qV-DUL">
             <objects>
-                <viewControllerPlaceholder storyboardName="Create" referencedIdentifier="CreateQRCodeViewController" id="RIM-TH-9qJ" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="T0q-VJ-bbQ"/>
+                <viewControllerPlaceholder storyboardName="Create" id="RIM-TH-9qJ" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" systemItem="mostViewed" id="T0q-VJ-bbQ"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EPx-Qa-fP8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="932" y="309"/>
+            <point key="canvasLocation" x="830" y="340"/>
         </scene>
     </scenes>
 </document>

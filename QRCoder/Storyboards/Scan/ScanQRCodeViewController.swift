@@ -16,18 +16,17 @@ import GoogleMVDataOutput
 class ScanQRCodeViewController: UIViewController, IsInScanStoryBoard {
     
     @IBOutlet weak var getQRCodeView: GetQRCodeView!
-    @IBOutlet weak var label: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         getQRCodeView.value
             .distinctUntilChanged()
-            .bind(to: label.rx.text)
+            .bind(to: rx.title)
             .disposed(by: disposeBag)
         
 //        let url = URL(string: "App-Prefs:root=WIFI")!
-//        
+//
 //        if UIApplication.shared.canOpenURL(url){
 //            UIApplication.shared.open(url)
 //        }
