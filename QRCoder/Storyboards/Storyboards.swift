@@ -22,3 +22,8 @@ protocol IsInCreateStoryBoard: IsInStoryboard {}
 extension IsInCreateStoryBoard {
     static var storyboardName: String { return "Create" }
 }
+
+protocol IsInMeStoryBoard: IsInStoryboard {}
+extension IsInMeStoryBoard {
+    static var storyboardName: String { return "Me" }
+}
