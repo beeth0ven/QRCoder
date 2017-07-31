@@ -75,6 +75,7 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="getQRCodeView" destination="wqP-et-Vzj" id="sMh-h1-HHg"/>
+                        <outlet property="label" destination="1QH-aa-Udm" id="3Kh-Xh-8JD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KlD-zj-S5x" userLabel="First Responder" sceneMemberID="firstResponder"/>

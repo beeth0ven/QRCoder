@@ -14,6 +14,7 @@ import RxCocoa
 class ScanQRCodeViewController: UIViewController, IsInScanStoryBoard {
     
     @IBOutlet weak var getQRCodeView: GetQRCodeView!
+    @IBOutlet weak var label: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +22,7 @@ class ScanQRCodeViewController: UIViewController, IsInScanStoryBoard {
         getQRCodeView.value
             .distinctUntilChanged()
             .delay(0.3, scheduler: MainScheduler.instance)
-            .bind(to: rx.title)
+            .bind(to: label.rx.text)
             .disposed(by: disposeBag)
         
 //        let url = URL(string: "App-Prefs:root=WIFI")!
