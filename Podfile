@@ -7,6 +7,7 @@ def shared
     pod 'RxDataSources', '~> 1.0.0'
     pod 'Action'
     pod 'RxRealm'
+    pod 'RxFeedback'
 end
 
 target 'Internal' do
