@@ -11,6 +11,7 @@ import BNKit
 import RxSwift
 import RxCocoa
 import Internal
+import Photos
 
 class CreateQRCodeTableViewController: UITableViewController, IsInCreateStoryBoard, CanGetImage {
     
@@ -19,20 +20,46 @@ class CreateQRCodeTableViewController: UITableViewController, IsInCreateStoryBoa
     @IBOutlet weak var qrcodeCenterImageView: UIImageView!
     @IBOutlet weak var selectImageCell: UITableViewCell!
     @IBOutlet weak var selectedImageView: UIImageView!
+    @IBOutlet weak var imageViewContainerView: UIView!
     
     lazy var selectImage: Observable<Void> = self.tableView.rx.itemSelected
         .filter { $0.section == 1 && $0.row == 0 }
         .mapToVoid()
     
+    lazy var saveImage: Observable<Void> = self.tableView.rx.itemSelected
+        .filter { $0.section == 3 && $0.row == 0 }
+        .mapToVoid()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        textField.rx.text.orEmpty
+        let qrcodeImage = textField.rx.text.orEmpty
             .debounce(1, scheduler: MainScheduler.instance)
             .filter { !$0.isEmpty }
             .distinctUntilChanged()
             .map { UIImage.qrCode(from: $0) }
+            .shareReplay(1)
+            
+        qrcodeImage
             .bind(to: imageView.rx.image(transitionType: "kCATransitionFade"))
+            .disposed(by: disposeBag)
+        
+        saveImage
+            .map { [unowned self] _ in UIImage(view: self.imageViewContainerView) }
+            .flatMapLatest { (image) in
+                PHPhotoLibrary.shared().rx.save(image)
+                    .materialize()
+            }
+            .subscribe(onNext: { (event) in
+                switch event {
+                case .next:
+                    print("Success")
+                case .error(let error):
+                    print("Fail: \(error)")
+                default:
+                    break
+                }
+            })
             .disposed(by: disposeBag)
         
         let image = selectImage
@@ -47,6 +74,29 @@ class CreateQRCodeTableViewController: UITableViewController, IsInCreateStoryBoa
             .bind(to: selectedImageView.rx.image)
             .disposed(by: disposeBag)
         
+    }
+}
+
+extension Reactive where Base: PHPhotoLibrary {
+    
+    func save(_ image: UIImage) -> Observable<Void> {
+        
+        return Observable.create { (observer) in
+            
+            self.base.performChanges({
+                PHAssetChangeRequest.creationRequestForAsset(from: image)
+            }, completionHandler: { (_, error) in
+                switch error {
+                case nil:
+                    observer.onNext(())
+                    observer.onCompleted()
+                case let error?:
+                    observer.onError(error)
+                }
+            })
+            
+            return Disposables.create()
+        }
     }
 }
 
@@ -74,5 +124,15 @@ class CreatePhoneCallQRCodeTableViewController: UITableViewController, IsInCreat
             .map { UIImage.qrCode(from: $0) }
             .bind(to: imageView.rx.image(transitionType: "kCATransitionFade"))
             .disposed(by: disposeBag)
+    }
+}
+
+extension UIImage {
+    convenience init(view: UIView) {
+        UIGraphicsBeginImageContext(view.frame.size)
+        view.layer.render(in: UIGraphicsGetCurrentContext()!)
+        let image = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        self.init(cgImage: image.cgImage!)
     }
 }
