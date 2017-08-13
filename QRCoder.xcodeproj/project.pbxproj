@@ -14,6 +14,7 @@
 		454C51E01F16078700853A00 /* Internal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 454C51D91F16078600853A00 /* Internal.framework */; };
 		454C51E11F16078700853A00 /* Internal.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 454C51D91F16078600853A00 /* Internal.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		454D200D1F1F04D7005A6794 /* Me.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 454D200C1F1F04D7005A6794 /* Me.storyboard */; };
+		45805CE21F400ED6000C76CA /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45805CE11F400ED6000C76CA /* BaseViewController.swift */; };
 		458B4E371F36DC2A0069F377 /* CanGetImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458B4E361F36DA410069F377 /* CanGetImage.swift */; };
 		45CB5DF11F171A5600A186E7 /* QRCodeAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CB5DF01F171A5600A186E7 /* QRCodeAction.swift */; };
 		45CB5DF41F171A9F00A186E7 /* QRCodeAction+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CB5DF31F171A9F00A186E7 /* QRCodeAction+Error.swift */; };
@@ -64,6 +65,7 @@
 		454C51DB1F16078700853A00 /* Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Internal.h; sourceTree = "<group>"; };
 		454C51DC1F16078700853A00 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		454D200C1F1F04D7005A6794 /* Me.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Me.storyboard; sourceTree = "<group>"; };
+		45805CE11F400ED6000C76CA /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		458B4E361F36DA410069F377 /* CanGetImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanGetImage.swift; sourceTree = "<group>"; };
 		45CB5DF01F171A5600A186E7 /* QRCodeAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeAction.swift; sourceTree = "<group>"; };
 		45CB5DF31F171A9F00A186E7 /* QRCodeAction+Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QRCodeAction+Error.swift"; sourceTree = "<group>"; };
@@ -164,9 +166,18 @@
 			name = Me;
 			sourceTree = "<group>";
 		};
+		45805CE01F400EB0000C76CA /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				45805CE11F400ED6000C76CA /* BaseViewController.swift */,
+			);
+			name = Base;
+			sourceTree = "<group>";
+		};
 		458B4E351F36DA410069F377 /* UIKit+ */ = {
 			isa = PBXGroup;
 			children = (
+				45805CE01F400EB0000C76CA /* Base */,
 				458B4E361F36DA410069F377 /* CanGetImage.swift */,
 			);
 			path = "UIKit+";
@@ -496,6 +507,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				458B4E371F36DC2A0069F377 /* CanGetImage.swift in Sources */,
+				45805CE21F400ED6000C76CA /* BaseViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
