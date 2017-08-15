@@ -136,7 +136,7 @@
                                                             <constraint firstAttribute="width" constant="30" id="8Fp-RE-BKf"/>
                                                             <constraint firstAttribute="height" constant="30" id="ko8-3z-27h"/>
                                                         </constraints>
-                                                        <state key="normal" backgroundImage="QR Code Filled"/>
+                                                        <state key="normal" backgroundImage="Phone"/>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -198,6 +198,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Phone" width="30" height="30"/>
         <image name="QR Code Filled" width="30" height="30"/>
     </resources>
 </document>
