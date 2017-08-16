@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--ScanQR Code View Controller-->
+        <!--Scan-->
         <scene sceneID="N57-Ve-h6X">
             <objects>
                 <viewController storyboardIdentifier="ScanQRCodeViewController" id="jmC-qU-oSX" customClass="ScanQRCodeViewController" customModule="QRCoder" customModuleProvider="target" sceneMemberID="viewController">
@@ -75,7 +75,7 @@
                             <constraint firstItem="pX7-5P-vNG" firstAttribute="top" secondItem="WiT-Le-wq4" secondAttribute="bottom" id="iEq-KP-PGd"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" systemItem="search" id="yYE-ru-5z0"/>
+                    <tabBarItem key="tabBarItem" title="Scan" image="Tab-Camera" selectedImage="Tab-Camera-Fill" id="yYE-ru-5z0"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="getQRCodeView" destination="wqP-et-Vzj" id="sMh-h1-HHg"/>
@@ -83,18 +83,14 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KlD-zj-S5x" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="xEy-so-iFS">
-                    <connections>
-                        <segue destination="6Jm-fF-aFd" kind="presentation" modalPresentationStyle="overFullScreen" modalTransitionStyle="coverVertical" id="UY0-Mn-sBy"/>
-                    </connections>
-                </tapGestureRecognizer>
+                <tapGestureRecognizer id="xEy-so-iFS"/>
             </objects>
             <point key="canvasLocation" x="549.60000000000002" y="-209.14542728635683"/>
         </scene>
-        <!--Base View Controller-->
+        <!--Code Alert View Controller-->
         <scene sceneID="fS3-mJ-CGU">
             <objects>
-                <viewController modalTransitionStyle="crossDissolve" modalPresentationStyle="overFullScreen" id="6Jm-fF-aFd" customClass="BaseViewController" customModule="Internal" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="QRCodeAlertViewController" modalPresentationStyle="overFullScreen" id="6Jm-fF-aFd" customClass="QRCodeAlertViewController" customModule="QRCoder" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jUN-wa-7kg"/>
                         <viewControllerLayoutGuide type="bottom" id="7s4-ec-H3T"/>
@@ -200,5 +196,7 @@
     <resources>
         <image name="Phone" width="30" height="30"/>
         <image name="QR Code Filled" width="30" height="30"/>
+        <image name="Tab-Camera" width="30" height="30"/>
+        <image name="Tab-Camera-Fill" width="30" height="30"/>
     </resources>
 </document>

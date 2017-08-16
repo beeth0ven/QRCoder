@@ -1099,11 +1099,11 @@
             </objects>
             <point key="canvasLocation" x="1486" y="1402"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Create-->
         <scene sceneID="7sZ-2w-1fZ">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Xxh-LT-pQb" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="mostViewed" id="9f6-Cm-GOT"/>
+                    <tabBarItem key="tabBarItem" title="Create" image="Tab-Create" selectedImage="Tab-Create-Filled" id="9f6-Cm-GOT"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="QBA-nj-LKW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -1125,6 +1125,8 @@
         <image name="Email" width="30" height="30"/>
         <image name="Phone" width="30" height="30"/>
         <image name="Safari" width="30" height="30"/>
+        <image name="Tab-Create" width="30" height="30"/>
+        <image name="Tab-Create-Filled" width="30" height="30"/>
         <image name="Text" width="30" height="30"/>
         <image name="Twitter" width="30" height="30"/>
     </resources>

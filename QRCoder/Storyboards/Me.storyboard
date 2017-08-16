@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.19" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="S6O-Xd-2nX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.17" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="S6O-Xd-2nX">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.16"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.14"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -96,11 +96,11 @@
             </objects>
             <point key="canvasLocation" x="390" y="-179"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Me-->
         <scene sceneID="Y33-2N-nA5">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="S6O-Xd-2nX" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="contacts" id="TYw-N7-NgI"/>
+                    <tabBarItem key="tabBarItem" title="Me" image="Tab-User" selectedImage="Tab-User-Filled" id="TYw-N7-NgI"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Fvx-D1-uaZ">
@@ -117,4 +117,8 @@
             <point key="canvasLocation" x="-382" y="-179"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Tab-User" width="90" height="90"/>
+        <image name="Tab-User-Filled" width="90" height="90"/>
+    </resources>
 </document>
