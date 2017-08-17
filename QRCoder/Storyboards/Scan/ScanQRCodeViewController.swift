@@ -21,40 +21,34 @@ class ScanQRCodeViewController: UIViewController, IsInScanStoryBoard {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         let getQRCodeView = self.getQRCodeView!
         
-        //        let qrcode = getQRCodeView.value
-        //            .take(1)
-        //            .distinctUntilChanged()
-        //            .delay(0.3, scheduler: MainScheduler.instance)
-        //            .shareReplay(1)
-        //
-        //        qrcode
-        //            .bind(to: label.rx.text)
-        //            .disposed(by: reusableDisboseBag)
-        //
-        //        qrcode
-        //            .bind(to: UIBindingObserver(UIElement: self) { (me, code) in
-        //                me.present(QRCodeAlertViewController.self)
-        //            })
-        //            .disposed(by: reusableDisboseBag)
+        let showQRCodeDetail = UIBindingObserver(UIElement: self) { (me, vc: QRCodeAlertViewController) in
+            me.present(vc, animated: true)
+        }
         
-        Observable<Any>.system(
+        let bindUI: (ObservableSchedulerContext<State>) -> Observable<Event> = UI.bind { state in
+            let subscriptions = [state.map { $0.qrcodeAlertViewController }.filterNil().distinctUntilChanged().bind(to: showQRCodeDetail)]
+            let events = [getQRCodeView.value.map(Event.scanedQRCode)]
+            return UI.Bindings(subscriptions: subscriptions, events: events)
+        }
+        
+        Observable.system(
             initialState: State(),
             reduce: State.reduce,
             scheduler: MainScheduler.instance,
-            feedback:
-                UI.bind { (state) in
-                    ([state.map { $0.qrcodeAlertViewController }.filterNil().subscribe(onNext: { [weak self] in self?.present($0, animated: true) })],
-                     [getQRCodeView.value.distinctUntilChanged().map(Event.scanedQRCode) ])
-                },
-                react(query: { $0.qrcodeAlertViewController }, effects: { $0.rx.viewWillDisappear.map { _ in Event.viewWillAppear } })
+            scheduledFeedback:
+                bindUI,
+                react(query: { $0.qrcodeAlertViewController }, effects: {
+                    $0.rx.viewWillDisappear.map { _ in Event.viewWillAppear }
+                })
             )
-            .debug()
+            .debug("State")
             .subscribe()
             .disposed(by: disposeBag)
     }
+    
+    
     
     struct State {
         var qrcode: String?
@@ -70,9 +64,6 @@ class ScanQRCodeViewController: UIViewController, IsInScanStoryBoard {
                     newState.qrcode = code
                     newState.qrcodeAlertViewController = QRCodeAlertViewController.fromStoryboard()
                     newState.isOnscreen = false
-                } else {
-                    newState.qrcode = nil
-                    newState.qrcodeAlertViewController = nil
                 }
             case .viewWillAppear:
                 newState.qrcode = nil
@@ -87,7 +78,6 @@ class ScanQRCodeViewController: UIViewController, IsInScanStoryBoard {
         case scanedQRCode(String)
         case viewWillAppear
     }
-    
 }
 
 class QRCodeAlertViewController: BaseViewController, IsInScanStoryBoard {
