@@ -12,6 +12,8 @@ import RxSwift
 import RxCocoa
 import Internal
 import RxFeedback
+import RxRealm
+import RealmSwift
 
 class ScanQRCodeViewController: UIViewController, IsInScanStoryBoard {
     
@@ -33,6 +35,12 @@ class ScanQRCodeViewController: UIViewController, IsInScanStoryBoard {
             return UI.Bindings(subscriptions: subscriptions, events: events)
         }
         
+        let bindRealm: (ObservableSchedulerContext<State>) -> Observable<Event>  = UI.bind { state in
+            let subscriptions = [state.map { $0.qrcode }.filterNil().distinctUntilChanged().map { QRCode(codeText: $0) }.subscribe(Realm.rx.add(update: true))]
+            let events = [Observable<Event>.never()]
+            return UI.Bindings(subscriptions: subscriptions, events: events)
+        }
+        
         Observable.system(
             initialState: State(),
             reduce: State.reduce,
@@ -41,9 +49,17 @@ class ScanQRCodeViewController: UIViewController, IsInScanStoryBoard {
                 bindUI,
                 react(query: { $0.qrcodeAlertViewController }, effects: {
                     $0.rx.viewWillDisappear.map { _ in Event.viewWillAppear }
-                })
+                }),
+                bindRealm
             )
-            .debug("State")
+//            .debug("State")
+            .subscribe()
+            .disposed(by: disposeBag)
+        
+        let realm = try! Realm()
+        Observable.collection(from: realm.objects(QRCode.self))
+            .map { $0.count }
+            .debug("QRCode")
             .subscribe()
             .disposed(by: disposeBag)
     }
@@ -56,7 +72,7 @@ class ScanQRCodeViewController: UIViewController, IsInScanStoryBoard {
         var isOnscreen: Bool = true
         
         static func reduce(state: State, event: Event) -> State {
-            print("Event:", event)
+//            print("Event:", event)
             var newState = state
             switch event {
             case .scanedQRCode(let code):

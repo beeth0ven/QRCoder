@@ -22,7 +22,7 @@ extension CanGetImage where Self: UIViewController {
         Queue.main.execute { self.present(vc, animated: true, completion: nil) }
         let didCancel = vc.rx.didCancel.flatMapLatest { _ in Observable<UIImage?>.empty() }
         let didFinish = vc.rx.didFinishPickingMediaWithInfo
-            .map { $0[UIImagePickerControllerOriginalImage] as? UIImage }
+            .map { $0[UIImagePickerControllerEditedImage] as? UIImage }
         return Observable.of(didCancel, didFinish)
             .merge()
     }

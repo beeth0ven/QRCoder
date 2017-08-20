@@ -50,12 +50,13 @@ class CreateQRCodeTableViewController: UITableViewController, IsInCreateStoryBoa
                 PHPhotoLibrary.shared().rx.save(image)
                     .materialize()
             }
+            .observeOnMainScheduler()
             .subscribe(onNext: { (event) in
                 switch event {
                 case .next:
-                    print("Success")
+                    TipView.show(state: TipView.State.textOnly("QRCode saved!"), delayDismiss: 2)
                 case .error(let error):
-                    print("Fail: \(error)")
+                    TipView.show(state: TipView.State.textOnly("Faild to save QRCode: \(error.localizedDescription)!"), delayDismiss: 2)
                 default:
                     break
                 }
