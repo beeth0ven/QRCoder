@@ -23,15 +23,24 @@ class ScanQRCodeViewController: UIViewController, IsInScanStoryBoard {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let getQRCodeView = self.getQRCodeView!
-        
         let showQRCodeDetail = UIBindingObserver(UIElement: self) { (me, vc: QRCodeAlertViewController) in
             me.present(vc, animated: true)
         }
         
-        let bindUI: (ObservableSchedulerContext<State>) -> Observable<Event> = UI.bind { state in
-            let subscriptions = [state.map { $0.qrcodeAlertViewController }.filterNil().distinctUntilChanged().bind(to: showQRCodeDetail)]
-            let events = [getQRCodeView.value.map(Event.scanedQRCode)]
+        let shouldCaptureQRCode = UIBindingObserver(UIElement: getQRCodeView) { (view, isOnscreen: Bool) in
+            isOnscreen ? view.startCapture() : view.stopCapture()
+        }
+        
+        let bindUI: (ObservableSchedulerContext<State>) -> Observable<Event> = UI.bind(self) { me, state in
+            let subscriptions = [
+                state.map { $0.qrcodeAlertViewController }.filterNil().distinctUntilChanged().bind(to: showQRCodeDetail),
+                state.map { $0.isOnscreen }.bind(to: shouldCaptureQRCode)
+            ]
+            let events = [
+                me.getQRCodeView.value.map(Event.scanedQRCode),
+                me.rx.viewWillAppear.map { _ in Event.viewWillAppear },
+                me.rx.viewWillDisappear.map { _ in Event.viewWillDisappear }
+            ]
             return UI.Bindings(subscriptions: subscriptions, events: events)
         }
         
@@ -56,12 +65,6 @@ class ScanQRCodeViewController: UIViewController, IsInScanStoryBoard {
             .subscribe()
             .disposed(by: disposeBag)
         
-        let realm = try! Realm()
-        Observable.collection(from: realm.objects(QRCode.self))
-            .map { $0.count }
-            .debug("QRCode")
-            .subscribe()
-            .disposed(by: disposeBag)
     }
     
     
@@ -85,6 +88,8 @@ class ScanQRCodeViewController: UIViewController, IsInScanStoryBoard {
                 newState.qrcode = nil
                 newState.qrcodeAlertViewController = nil
                 newState.isOnscreen = true
+            case .viewWillDisappear:
+                newState.isOnscreen = false
             }
             return newState
         }
@@ -93,6 +98,7 @@ class ScanQRCodeViewController: UIViewController, IsInScanStoryBoard {
     enum Event {
         case scanedQRCode(String)
         case viewWillAppear
+        case viewWillDisappear
     }
 }
 
