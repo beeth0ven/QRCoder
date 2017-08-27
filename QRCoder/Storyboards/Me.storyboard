@@ -100,10 +100,10 @@
             </objects>
             <point key="canvasLocation" x="390" y="-179"/>
         </scene>
-        <!--ScanedQR Code Table View Controller-->
+        <!--Scaned QRCodes-->
         <scene sceneID="zmK-uB-I17">
             <objects>
-                <tableViewController id="YTG-rq-J5N" customClass="ScanedQRCodeTableViewController" customModule="QRCoder" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController hidesBottomBarWhenPushed="YES" id="YTG-rq-J5N" customClass="ScanedQRCodeTableViewController" customModule="QRCoder" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="95" sectionHeaderHeight="28" sectionFooterHeight="28" id="xMp-K2-3OO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -163,6 +163,7 @@
                             <outlet property="delegate" destination="YTG-rq-J5N" id="h8M-PX-0GS"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Scaned QRCodes" id="L3g-7D-1OP"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9gc-cd-mR7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -22,3 +22,12 @@ class QRCode: Object {
         self.codeText = codeText
     }
 }
+
+
+class ScanedQRCode: QRCode {
+    
+}
+
+class CreatedQRCode: QRCode {
+    
+}

@@ -27,7 +27,7 @@ class ScanedQRCodeTableViewController: BaseTableViewController {
         
         // Bind UI
         
-        let configureCell: (Int, QRCode, ScanedQRCodeCell) -> Void = { (row, model, cell) in
+        let configureCell: (Int, ScanedQRCode, ScanedQRCodeCell) -> Void = { (row, model, cell) in
             cell.update(with: model)
         }
         
@@ -55,7 +55,7 @@ class ScanedQRCodeTableViewController: BaseTableViewController {
         
         let bindRealm: (ObservableSchedulerContext<State>) -> Observable<Event>  = { _ in
             let realm = try! Realm()
-            let objects = realm.objects(QRCode.self)
+            let objects = realm.objects(ScanedQRCode.self)
                 .sorted(byKeyPath: "createdAt", ascending: false)
             return Observable.collection(from: objects).map(Event.qrcodeResults)
         }
@@ -80,7 +80,7 @@ class ScanedQRCodeTableViewController: BaseTableViewController {
     }
     
     struct State {
-        var qrcodeResults: Results<QRCode>!
+        var qrcodeResults: Results<ScanedQRCode>!
         var selectedIndexPath: IndexPath?
         var selectedQRCode: QRCode?
         
@@ -101,7 +101,7 @@ class ScanedQRCodeTableViewController: BaseTableViewController {
     }
     
     enum Event {
-        case qrcodeResults(Results<QRCode>)
+        case qrcodeResults(Results<ScanedQRCode>)
         case indexPathSelected(IndexPath)
     }
 }
@@ -111,7 +111,7 @@ class ScanedQRCodeCell: UITableViewCell {
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var iconButton: UIButton!
     
-    func update(with model: QRCode) {
+    func update(with model: ScanedQRCode) {
         label.text = model.codeText
     }
 }
