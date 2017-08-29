@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.17" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="S6O-Xd-2nX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.19" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="S6O-Xd-2nX">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.16"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -61,6 +60,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="A9F-JK-Adm" kind="show" id="B9Y-qh-DBB"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -103,7 +105,7 @@
         <!--Scaned QRCodes-->
         <scene sceneID="zmK-uB-I17">
             <objects>
-                <tableViewController hidesBottomBarWhenPushed="YES" id="YTG-rq-J5N" customClass="ScanedQRCodeTableViewController" customModule="QRCoder" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ScanedQRCodeTableViewController" hidesBottomBarWhenPushed="YES" id="YTG-rq-J5N" customClass="ScanedQRCodeTableViewController" customModule="QRCoder" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="95" sectionHeaderHeight="28" sectionFooterHeight="28" id="xMp-K2-3OO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -167,7 +169,54 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9gc-cd-mR7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1244" y="-179.46026986506749"/>
+            <point key="canvasLocation" x="1425" y="-525"/>
+        </scene>
+        <!--Created QRCodes-->
+        <scene sceneID="Zxq-PI-6CD">
+            <objects>
+                <tableViewController storyboardIdentifier="CreatedQRCodeTableViewController" hidesBottomBarWhenPushed="YES" id="A9F-JK-Adm" customClass="CreatedQRCodeTableViewController" customModule="QRCoder" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="95" sectionHeaderHeight="28" sectionFooterHeight="28" id="PqB-pS-nWr">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.90823972230000005" green="0.92638683320000004" blue="0.93171715740000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="fMx-PH-Kg8">
+                            <rect key="frame" x="0.0" y="99" width="375" height="1"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </view>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UITableViewCell" textLabel="Bnf-Xy-eqb" rowHeight="71" style="IBUITableViewCellStyleDefault" id="c75-uc-cuz">
+                                <rect key="frame" x="0.0" y="28" width="375" height="71"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="c75-uc-cuz" id="w10-0e-cQH">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="70.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Bnf-Xy-eqb">
+                                            <rect key="frame" x="16" y="0.0" width="344" height="70.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <sections/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="cellSelfSized" value="YES"/>
+                        </userDefinedRuntimeAttributes>
+                        <connections>
+                            <outlet property="dataSource" destination="A9F-JK-Adm" id="5cz-CC-mVv"/>
+                            <outlet property="delegate" destination="A9F-JK-Adm" id="6c4-0x-ktF"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Created QRCodes" id="uaZ-a6-hDz"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="M7i-eO-I0w" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1425" y="132"/>
         </scene>
         <!--Me-->
         <scene sceneID="Y33-2N-nA5">

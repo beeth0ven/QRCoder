@@ -30,4 +30,5 @@ class ScanedQRCode: QRCode {
 
 class CreatedQRCode: QRCode {
     
+    @objc dynamic var centerImageData: Data?
 }
