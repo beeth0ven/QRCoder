@@ -52,6 +52,15 @@ class CreateQRCodeTableViewController: UITableViewController, IsInCreateStoryBoa
             TipView.show(state: .textOnly(text), delayDismiss: 2)
         }
         
+        let saveImageTrigger: (ObservableSchedulerContext<State>) -> Observable<Event> = {  state in
+            state.flatMapLatest { [weak self]  state -> Observable<Event> in
+                if state.isSavingImage || self == nil {
+                    return Observable.empty()
+                }
+                return self!.saveImage.map { _ in Event.saveImage }
+            }
+        }
+        
         let bindUI: (ObservableSchedulerContext<State>) -> Observable<Event> = UI.bind(self) { me, state in
             let centerImage = state.map { $0.qrcode.centerImageData }.map { $0.flatMap { UIImage.init(data: $0) } }.shareReplay(1)
             let subscriptions = [
@@ -68,12 +77,7 @@ class CreateQRCodeTableViewController: UITableViewController, IsInCreateStoryBoa
                 me.saveBarButtonItem.rx.tap.map { _ in Event.saveQRCode },
                 me.deleteBarButtonItem.rx.tap.map { _ in Event.deleteQRCode },
                 me.cancelBarButtonItem.rx.tap.map { _ in Event.cancel },
-                state.flatMapLatest { [weak me] state -> Observable<Event> in
-                    if state.isSavingImage || me == nil {
-                        return Observable.empty()
-                    }
-                    return me!.saveImage.map { _ in Event.saveImage }
-                }
+                saveImageTrigger(state)
             ]
             return UI.Bindings(subscriptions: subscriptions, events: events)
         }

@@ -12,13 +12,15 @@ import RxSwift
 
 class QRCode: Object {
     
+    @objc dynamic var id: String = UUID().uuidString
     @objc dynamic var codeText: String = ""
     @objc dynamic var createdAt: Date = Date()
     
-    override class func primaryKey() -> String? { return "codeText" }
+    override class func primaryKey() -> String? { return "id" }
     
     public convenience init(codeText: String) {
         self.init()
+        
         self.codeText = codeText
     }
 }
