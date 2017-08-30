@@ -295,36 +295,15 @@
                                                             <rect key="frame" x="-0.5" y="0.0" width="240" height="240"/>
                                                             <color key="backgroundColor" red="0.90823972230000005" green="0.92638683320000004" blue="0.93171715740000005" alpha="1" colorSpace="calibratedRGB"/>
                                                         </imageView>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dNg-OU-mCO">
-                                                            <rect key="frame" x="89.5" y="90" width="60" height="60"/>
-                                                            <color key="backgroundColor" red="0.90823972225189209" green="0.92638683319091797" blue="0.9317171573638916" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" secondItem="dNg-OU-mCO" secondAttribute="height" multiplier="1:1" id="4CP-cU-qBR"/>
-                                                            </constraints>
-                                                            <userDefinedRuntimeAttributes>
-                                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                    <real key="value" value="5"/>
-                                                                </userDefinedRuntimeAttribute>
-                                                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                                    <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                </userDefinedRuntimeAttribute>
-                                                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                                    <real key="value" value="3"/>
-                                                                </userDefinedRuntimeAttribute>
-                                                            </userDefinedRuntimeAttributes>
-                                                        </imageView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
-                                                        <constraint firstItem="dNg-OU-mCO" firstAttribute="centerY" secondItem="oxq-bv-F9T" secondAttribute="centerY" id="BJQ-rA-ubi"/>
                                                         <constraint firstAttribute="width" constant="240" id="NoR-Hb-40Y"/>
                                                         <constraint firstAttribute="trailing" secondItem="oxq-bv-F9T" secondAttribute="trailing" id="TOu-OM-j4S"/>
                                                         <constraint firstAttribute="bottom" secondItem="oxq-bv-F9T" secondAttribute="bottom" id="XaA-Ho-KXf"/>
                                                         <constraint firstItem="oxq-bv-F9T" firstAttribute="top" secondItem="z3a-Iu-3iU" secondAttribute="top" id="d99-kc-isp"/>
-                                                        <constraint firstItem="dNg-OU-mCO" firstAttribute="width" secondItem="oxq-bv-F9T" secondAttribute="width" multiplier="1:4" id="h3Y-bN-S4E"/>
                                                         <constraint firstAttribute="width" secondItem="z3a-Iu-3iU" secondAttribute="height" id="mWu-8D-UVb"/>
                                                         <constraint firstItem="oxq-bv-F9T" firstAttribute="leading" secondItem="z3a-Iu-3iU" secondAttribute="leading" id="nI6-bM-NYC"/>
-                                                        <constraint firstItem="dNg-OU-mCO" firstAttribute="centerX" secondItem="oxq-bv-F9T" secondAttribute="centerX" id="ot3-Qq-o1w"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -388,7 +367,6 @@
                     <connections>
                         <outlet property="imageView" destination="oxq-bv-F9T" id="1L8-P0-d9l"/>
                         <outlet property="imageViewContainerView" destination="z3a-Iu-3iU" id="MS6-nu-cfO"/>
-                        <outlet property="qrcodeCenterImageView" destination="dNg-OU-mCO" id="NcS-Q4-bYn"/>
                         <outlet property="selectImageCell" destination="Evk-CL-sDX" id="Mne-av-Qee"/>
                         <outlet property="selectedImageView" destination="Tep-I9-Btp" id="Sni-j4-5Nx"/>
                         <outlet property="textField" destination="Jgs-wd-UCM" id="Bp8-wF-X9N"/>
