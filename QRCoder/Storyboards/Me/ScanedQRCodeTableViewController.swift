@@ -27,11 +27,11 @@ class ScanedQRCodeTableViewController: BaseTableViewController {
         
         // Bind UI
         
-        let configureCell: (Int, ScanedQRCode, ScanedQRCodeCell) -> Void = { (row, model, cell) in
+        let configureCell: (Int, ScanedQRCodeObject, ScanedQRCodeCell) -> Void = { (row, model, cell) in
             cell.update(with: model)
         }
         
-        let showQRCodeDetail = UIBindingObserver(UIElement: self) { (me, code: ScanedQRCode) in
+        let showQRCodeDetail = UIBindingObserver(UIElement: self) { (me, code: ScanedQRCodeObject) in
             me.present(QRCodeAlertViewController.self)
         }
         
@@ -55,7 +55,7 @@ class ScanedQRCodeTableViewController: BaseTableViewController {
         
         let bindRealm: (ObservableSchedulerContext<State>) -> Observable<Event>  = { _ in
             let realm = try! Realm()
-            let objects = realm.objects(ScanedQRCode.self)
+            let objects = realm.objects(ScanedQRCodeObject.self)
                 .sorted(byKeyPath: "createdAt", ascending: false)
             return Observable.collection(from: objects).map(Event.qrcodeResults)
         }
@@ -74,15 +74,15 @@ class ScanedQRCodeTableViewController: BaseTableViewController {
             .subscribe()
             .disposed(by: disposeBag)
         
-        tableView.rx.modelDeleted(QRCode.self)
+        tableView.rx.modelDeleted(ScanedQRCodeObject.self)
             .subscribe(Realm.rx.delete())
             .disposed(by: disposeBag)
     }
     
     struct State {
-        var qrcodeResults: Results<ScanedQRCode>!
+        var qrcodeResults: Results<ScanedQRCodeObject>!
         var selectedIndexPath: IndexPath?
-        var selectedQRCode: ScanedQRCode?
+        var selectedQRCode: ScanedQRCodeObject?
         
         static func reduce(state: State, event: Event) -> State {
             print("Event:", event)
@@ -101,7 +101,7 @@ class ScanedQRCodeTableViewController: BaseTableViewController {
     }
     
     enum Event {
-        case qrcodeResults(Results<ScanedQRCode>)
+        case qrcodeResults(Results<ScanedQRCodeObject>)
         case indexPathSelected(IndexPath)
     }
 }
@@ -111,7 +111,7 @@ class ScanedQRCodeCell: UITableViewCell {
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var iconButton: UIButton!
     
-    func update(with model: ScanedQRCode) {
+    func update(with model: ScanedQRCodeObject) {
         label.text = model.codeText
     }
 }

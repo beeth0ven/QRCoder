@@ -15,7 +15,7 @@ import RxFeedback
 import RxRealm
 import RealmSwift
 
-class CreatedQRCodeTableViewController: BaseTableViewController {
+class CreatedQRCodeTableViewController: BaseTableViewController, CanUpdateQRCode {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,9 +29,8 @@ class CreatedQRCodeTableViewController: BaseTableViewController {
 //            cell.textLabel?.text = model.codeText
 //        }
         
-        let showQRCodeDetail = UIBindingObserver(UIElement: self) { (me, code: CreatedQRCode) in
-//            me.present(QRCodeAlertViewController.self)
-            print("Show QRCode")
+        let updateQRCode = UIBindingObserver(UIElement: self) { (me, code: CreatedQRCodeObject) in
+            me.update(qrcode: code)
         }
 
         let deselectRow = UIBindingObserver(UIElement: self) { (me, indexPath: IndexPath) in
@@ -40,11 +39,11 @@ class CreatedQRCodeTableViewController: BaseTableViewController {
         
         let bindUI: (ObservableSchedulerContext<State>) -> Observable<Event> = UI.bind(self) { me, state in
             let subscriptions = [
-                state.map { $0.qrcodeResults }.filterNil().bind(to: me.tableView.rx.items()){ (row, model, cell) in
+                state.map { $0.qrcodeResults }.filterNil().bind(to: me.tableView.rx.items(), curriedArgument: { (row, model, cell) in
                     cell.textLabel?.text = model.codeText
-                },
+                }),
                 state.map { $0.selectedIndexPath }.filterNil().bind(to: deselectRow),
-                state.map { $0.selectedQRCode }.filterNil().bind(to: showQRCodeDetail)
+                state.map { $0.selectedQRCode }.filterNil().bind(to: updateQRCode)
             ]
             let events = [
                 me.tableView.rx.itemSelected.map(Event.indexPathSelected)
@@ -54,9 +53,10 @@ class CreatedQRCodeTableViewController: BaseTableViewController {
         
         // Bind Realm
         
+        let realm = try! Realm()
+        
         let bindRealm: (ObservableSchedulerContext<State>) -> Observable<Event>  = { _ in
-            let realm = try! Realm()
-            let objects = realm.objects(CreatedQRCode.self)
+            let objects = realm.objects(CreatedQRCodeObject.self)
                 .sorted(byKeyPath: "createdAt", ascending: false)
             return Observable.collection(from: objects).map(Event.qrcodeResults)
         }
@@ -75,15 +75,15 @@ class CreatedQRCodeTableViewController: BaseTableViewController {
             .subscribe()
             .disposed(by: disposeBag)
         
-        tableView.rx.modelDeleted(QRCode.self)
+        tableView.rx.modelDeleted(CreatedQRCodeObject.self)
             .subscribe(Realm.rx.delete())
             .disposed(by: disposeBag)
     }
     
     struct State {
-        var qrcodeResults: Results<CreatedQRCode>!
+        var qrcodeResults: Results<CreatedQRCodeObject>!
         var selectedIndexPath: IndexPath?
-        var selectedQRCode: CreatedQRCode?
+        var selectedQRCode: CreatedQRCodeObject?
         
         static func reduce(state: State, event: Event) -> State {
             print("Event:", event)
@@ -102,7 +102,7 @@ class CreatedQRCodeTableViewController: BaseTableViewController {
     }
     
     enum Event {
-        case qrcodeResults(Results<CreatedQRCode>)
+        case qrcodeResults(Results<CreatedQRCodeObject>)
         case indexPathSelected(IndexPath)
     }
 }

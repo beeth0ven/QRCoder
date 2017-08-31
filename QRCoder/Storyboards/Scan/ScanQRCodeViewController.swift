@@ -45,7 +45,7 @@ class ScanQRCodeViewController: UIViewController, IsInScanStoryBoard {
         }
         
         let bindRealm: (ObservableSchedulerContext<State>) -> Observable<Event>  = UI.bind { state in
-            let subscriptions = [state.map { $0.qrcode }.filterNil().distinctUntilChanged().map { ScanedQRCode(codeText: $0) }.subscribe(Realm.rx.add(update: true))]
+            let subscriptions = [state.map { $0.qrcode }.filterNil().distinctUntilChanged().map { ScanedQRCodeObject(codeText: $0) }.subscribe(Realm.rx.add(update: true))]
             let events = [Observable<Event>.never()]
             return UI.Bindings(subscriptions: subscriptions, events: events)
         }

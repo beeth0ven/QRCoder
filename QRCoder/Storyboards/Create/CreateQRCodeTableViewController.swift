@@ -16,6 +16,21 @@ import RxRealm
 import RealmSwift
 import RxFeedback
 
+protocol CanUpdateQRCode {}
+extension CanUpdateQRCode where Self: UIViewController {
+    
+    func update(qrcode: CreatedQRCodeObject) {
+        
+        self.present(CreateQRCodeNavigationController.self) {
+            let vc = $0.topViewController as! CreateQRCodeTableViewController
+            vc.isCreate = false
+            vc.qrcode = CreatedQRCode(codeObject: qrcode) 
+        }
+    }
+}
+
+class CreateQRCodeNavigationController: UINavigationController, IsInCreateStoryBoard {}
+
 class CreateQRCodeTableViewController: UITableViewController, IsInCreateStoryBoard, CanGetImage {
     
     @IBOutlet weak var imageView: UIImageView!
@@ -24,12 +39,16 @@ class CreateQRCodeTableViewController: UITableViewController, IsInCreateStoryBoa
     @IBOutlet weak var selectedImageView: UIImageView!
     @IBOutlet weak var imageViewContainerView: UIView!
     
-    private var qrcode: CreatedQRCode!
-    private var isCreate = true
+    fileprivate var qrcode: CreatedQRCode!
+    fileprivate var isCreate = true
     
     private lazy var cancelBarButtonItem: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: nil, action: nil)
     private lazy var saveBarButtonItem: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: nil, action: nil)
-    private lazy var deleteBarButtonItem: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: nil, action: nil)
+    private lazy var deleteBarButtonItem: UIBarButtonItem = {
+        let item = UIBarButtonItem(title: "Delete", style: .plain, target: nil, action: nil)
+        item.tintColor = UIColor.red
+        return item
+    }()
     
     lazy var selectImage: Observable<Void> = self.tableView.rx.itemSelected
         .filter { $0.section == 1 && $0.row == 0 }
@@ -41,7 +60,6 @@ class CreateQRCodeTableViewController: UITableViewController, IsInCreateStoryBoa
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         navigationItem.leftBarButtonItem = isCreate ? cancelBarButtonItem : deleteBarButtonItem
         navigationItem.rightBarButtonItem = saveBarButtonItem
         
@@ -63,6 +81,7 @@ class CreateQRCodeTableViewController: UITableViewController, IsInCreateStoryBoa
         let bindUI: (ObservableSchedulerContext<State>) -> Observable<Event> = UI.bind(self) { me, state in
             let centerImage = state.map { $0.qrcode.centerImageData }.map { $0.flatMap { UIImage.init(data: $0) } }.shareReplay(1)
             let subscriptions = [
+                state.map { $0.qrcode.codeText }.distinctUntilChanged().bind(to: me.textField.rx.text),
                 state.map { $0.qrcodeImage }.bind(to: me.imageView.rx.image(transitionType: "kCATransitionFade")),
                 centerImage.bind(to: me.selectedImageView.rx.image),
                 state.map { $0.shouldDissmis }.filterNil().bind(to: me.rx.dismiss),
@@ -86,8 +105,8 @@ class CreateQRCodeTableViewController: UITableViewController, IsInCreateStoryBoa
         
         let bindRealm: (ObservableSchedulerContext<State>) -> Observable<Event> = UI.bind(self) { me, state in
             let subscriptions = [
-                state.map { $0.qrcodeToBeSave }.filterNil().subscribe(realm.rx.add(update: true)),
-                state.map { $0.qrcodeToBeDelete }.filterNil().subscribe(realm.rx.delete()),
+                state.map { $0.qrcodeToBeSave }.filterNil().map { $0.object }.subscribe(realm.rx.add(update: true)),
+                state.map { $0.qrcodeToBeDelete }.filterNil().map { realm.object(ofType: CreatedQRCodeObject.self, forPrimaryKey: $0.id) }.filterNil().subscribe(realm.rx.delete()),
             ]
             let events = [Observable<Event>.never()]
             return UI.Bindings(subscriptions: subscriptions, events: events)
@@ -102,10 +121,14 @@ class CreateQRCodeTableViewController: UITableViewController, IsInCreateStoryBoa
                 .map(Event.saveImageResult)
         })
         
+        let qrcode: CreatedQRCode = isCreate ? CreatedQRCode() : self.qrcode!
+        
+        // RxFeedback
+        
         Observable.system(
-            initialState: State(qrcode: CreatedQRCode()),
+            initialState: State(qrcode: qrcode),
             reduce: State.reduce,
-            scheduler: MainScheduler.instance,
+            scheduler: MainScheduler.asyncInstance,
             scheduledFeedback:
                 bindUI,
                 bindRealm,
@@ -114,18 +137,17 @@ class CreateQRCodeTableViewController: UITableViewController, IsInCreateStoryBoa
             .debug("State")
             .subscribe()
             .disposed(by: disposeBag)
-        
     }
     
     struct State {
-        let qrcode: CreatedQRCode
+        var qrcode: CreatedQRCode
         var qrcodeImage: UIImage?
         var shouldDissmis: Void?
         var qrcodeToBeSave: CreatedQRCode?
         var qrcodeToBeDelete: CreatedQRCode?
         
-        var isSavingImage = false
         var imageToBeSave: UIImage?
+        var isSavingImage = false
         var imageSaved: Void?
         var imageSaveError: Error?
         
@@ -144,6 +166,8 @@ class CreateQRCodeTableViewController: UITableViewController, IsInCreateStoryBoa
         }
         
         static func reduce(state: State, event: Event) -> State {
+            print("Event:", event)
+            print("Thread.current:", Thread.current)
             var newState = state
             newState.reset()
             switch event {
@@ -192,67 +216,6 @@ class CreateQRCodeTableViewController: UITableViewController, IsInCreateStoryBoa
 enum Result<E> {
     case success(E)
     case failure(Swift.Error)
-}
-
-
-
-
-
-
-extension CreatedQRCode {
-    var image: UIImage? {
-        guard !codeText.isEmpty else {
-            return nil
-        }
-        let centerImage = centerImageData.flatMap { UIImage.init(data: $0) }
-        return UIImage.qrcode(from: codeText, centerImage: centerImage)
-    }
-}
-
-extension UIImage {
-    
-    public static func qrcode(from text: String, length: CGFloat = 400, centerImage: UIImage? = nil, tintColor: UIColor? = nil) -> UIImage {
-        let data = text.data(using: .utf8)!
-        let qrFilter = CIFilter(name: "CIQRCodeGenerator")!
-        qrFilter.setDefaults()
-        qrFilter.setValue(data, forKey: "inputMessage")
-        qrFilter.setValue("H", forKey: "inputCorrectionLevel")
-        let ciImage: CIImage
-        if let tintColor = tintColor {
-            let colorFilter = CIFilter(name: "CIFalseColor")!
-            colorFilter.setDefaults()
-            colorFilter.setValue(qrFilter.outputImage, forKey: "inputImage")
-            colorFilter.setValue(CIColor(color: tintColor), forKey: "inputColor0")
-            colorFilter.setValue(CIColor(color: .white), forKey: "inputColor1")
-            ciImage = colorFilter.outputImage!
-        } else {
-            ciImage = qrFilter.outputImage!
-        }
-        
-        let scaleX = length / ciImage.extent.size.width
-        let scaleY = length / ciImage.extent.size.height
-        let transformedImage = ciImage.applying(CGAffineTransform(scaleX: scaleX, y: scaleY))
-        let codeImage = UIImage(ciImage: transformedImage)
-        let rect = CGRect(origin: .zero, size: codeImage.size)
-        UIGraphicsBeginImageContext(codeImage.size)
-        codeImage.draw(in: rect)
-        if let centerImage = centerImage {
-            let centerImageBackgroundRect = CGRect(center: rect.center, size: rect.size /  3.5)
-            let centerImageRect = CGRect(center: rect.center, size: rect.size / 4)
-            let cornerRadius = centerImageBackgroundRect.width / 10
-            let path = UIBezierPath(roundedRect: centerImageBackgroundRect, cornerRadius: cornerRadius)
-            UIColor.white.setFill()
-            path.fill()
-            centerImage.draw(in: centerImageRect)
-        }
-        let image = UIGraphicsGetImageFromCurrentImageContext()!
-        UIGraphicsEndImageContext()
-        return image
-    }
-}
-
-func /(size: CGSize, unit: CGFloat) -> CGSize {
-    return CGSize(width: size.width / unit, height: size.height / unit)
 }
 
 
@@ -305,14 +268,3 @@ class CreatePhoneCallQRCodeTableViewController: UITableViewController, IsInCreat
             .disposed(by: disposeBag)
     }
 }
-
-//extension UIImage {
-//    convenience init(view: UIView) {
-//        UIGraphicsBeginImageContext(view.frame.size)
-//        view.layer.render(in: UIGraphicsGetCurrentContext()!)
-//        let image = UIGraphicsGetImageFromCurrentImageContext()!
-//        UIGraphicsEndImageContext()
-//        self.init(cgImage: image.cgImage!)
-//    }
-//}
-
