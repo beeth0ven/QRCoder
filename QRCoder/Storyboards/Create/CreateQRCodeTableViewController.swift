@@ -39,6 +39,9 @@ class CreateQRCodeTableViewController: UITableViewController, IsInCreateStoryBoa
     @IBOutlet weak var selectedImageView: UIImageView!
     @IBOutlet weak var imageViewContainerView: UIView!
     
+    typealias State = CreateQRCodeState
+    typealias Event = CreateQRCodeEvent
+    
     fileprivate var qrcode: CreatedQRCode!
     fileprivate var isCreate = true
     
@@ -60,6 +63,7 @@ class CreateQRCodeTableViewController: UITableViewController, IsInCreateStoryBoa
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         navigationItem.leftBarButtonItem = isCreate ? cancelBarButtonItem : deleteBarButtonItem
         navigationItem.rightBarButtonItem = saveBarButtonItem
         
@@ -90,7 +94,7 @@ class CreateQRCodeTableViewController: UITableViewController, IsInCreateStoryBoa
             ]
             let events = [
                 me.textField.rx.text.orEmpty.debounce(0.3, scheduler: MainScheduler.asyncInstance).map(Event.textChanged),
-                me.selectImage.flatMapLatest { [unowned me] _ in me.getImage() }.observeOnMainScheduler().map(Event.imageSelected),
+                me.selectImage.flatMapLatest { [unowned me] _ in me.getImage() }.map(Event.imageSelected),
                 me.saveBarButtonItem.rx.tap.map { _ in Event.saveQRCode },
                 me.deleteBarButtonItem.rx.tap.map { _ in Event.deleteQRCode },
                 me.cancelBarButtonItem.rx.tap.map { _ in Event.cancel },
@@ -116,8 +120,7 @@ class CreateQRCodeTableViewController: UITableViewController, IsInCreateStoryBoa
         
         let saveImage: (ObservableSchedulerContext<State>) -> Observable<Event> = react(query: { $0.imageToBeSave }, effects: { imageToBeSave in
             PHPhotoLibrary.shared().rx.save(imageToBeSave)
-                .map(Result.success)
-                .catchError { error in .just(.failure(error)) }
+                .mapToResult()
                 .map(Event.saveImageResult)
         })
         
@@ -137,117 +140,6 @@ class CreateQRCodeTableViewController: UITableViewController, IsInCreateStoryBoa
             .debug("State")
             .subscribe()
             .disposed(by: disposeBag)
-    }
-    
-    struct State {
-        var qrcode: CreatedQRCode
-        var qrcodeImage: UIImage?
-        var shouldDissmis: Void?
-        var qrcodeToBeSave: CreatedQRCode?
-        var qrcodeToBeDelete: CreatedQRCode?
-        
-        var imageToBeSave: UIImage?
-        var isSavingImage = false
-        var imageSaved: Void?
-        var imageSaveError: Error?
-        
-        init(qrcode: CreatedQRCode) {
-            self.qrcode = qrcode
-            self.qrcodeImage = qrcode.image
-        }
-        
-        private mutating func reset() {
-            shouldDissmis = nil
-            qrcodeToBeSave = nil
-            qrcodeToBeDelete = nil
-            imageToBeSave = nil
-            imageSaved = nil
-            imageSaveError = nil
-        }
-        
-        static func reduce(state: State, event: Event) -> State {
-            print("Event:", event)
-            print("Thread.current:", Thread.current)
-            var newState = state
-            newState.reset()
-            switch event {
-            case .textChanged(let text):
-                newState.qrcode.codeText = text
-                newState.qrcodeImage = newState.qrcode.image
-            case .imageSelected(let image):
-                newState.qrcode.centerImageData = image.flatMap { UIImageJPEGRepresentation($0, 0.7) }
-                newState.qrcodeImage = newState.qrcode.image
-            case .saveQRCode:
-                newState.shouldDissmis = ()
-                newState.qrcodeToBeSave = newState.qrcode
-            case .deleteQRCode:
-                newState.shouldDissmis = ()
-                newState.qrcodeToBeDelete = newState.qrcode
-            case .cancel:
-                newState.shouldDissmis = ()
-            case .saveImage:
-                if !newState.qrcode.codeText.isEmpty {
-                    newState.isSavingImage = true
-                    newState.imageToBeSave = newState.qrcodeImage
-                }
-            case .saveImageResult(.success):
-                newState.isSavingImage = false
-                newState.imageSaved = ()
-            case .saveImageResult(.failure(let error)):
-                newState.isSavingImage = false
-                newState.imageSaveError = error
-            }
-            return newState
-        }
-    }
-    
-    enum Event {
-        case textChanged(String)
-        case imageSelected(UIImage?)
-        case saveQRCode
-        case deleteQRCode
-        case cancel
-        case saveImage
-        case saveImageResult(Result<Void>)
-    }
-}
-
-
-enum Result<E> {
-    case success(E)
-    case failure(Swift.Error)
-}
-
-
-extension Reactive where Base: PHPhotoLibrary {
-    
-    func save(_ image: UIImage) -> Observable<Void> {
-        
-        return Observable.create { (observer) in
-            
-            self.base.performChanges({
-                PHAssetChangeRequest.creationRequestForAsset(from: image)
-            }, completionHandler: { (_, error) in
-                switch error {
-                case nil:
-                    observer.onNext(())
-                    observer.onCompleted()
-                case let error?:
-                    observer.onError(error)
-                }
-            })
-            
-            return Disposables.create()
-        }
-    }
-}
-
-extension Reactive where Base: UIButton {
-    
-    func image(for state: UIControlState = .normal) -> UIBindingObserver<Base, UIImage?> {
-        return UIBindingObserver(UIElement: base, binding: { (button, image) in
-            button.setImage(image, for: state)
-        })
     }
 }
 
