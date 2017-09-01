@@ -12,6 +12,7 @@
 		450E226F1F58EE7600B4DC34 /* CreateQRCodeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450E226E1F58EE7600B4DC34 /* CreateQRCodeState.swift */; };
 		450E22721F58EFA200B4DC34 /* PHPhotoLibrary+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450E22711F58EFA200B4DC34 /* PHPhotoLibrary+Rx.swift */; };
 		450E22751F58EFF200B4DC34 /* UIButton+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450E22741F58EFF200B4DC34 /* UIButton+Rx.swift */; };
+		450E22771F58F75700B4DC34 /* UIImage+qrcode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450E22761F58F75700B4DC34 /* UIImage+qrcode.swift */; };
 		4540C7951F4983D200AAD4E6 /* QRCodeObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4540C7941F4983D200AAD4E6 /* QRCodeObject.swift */; };
 		4546A8251F5401B3004BB4A8 /* ScanedQRCodeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4546A8241F540084004BB4A8 /* ScanedQRCodeTableViewController.swift */; };
 		4546A8261F5401B9004BB4A8 /* MeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4546A8231F540084004BB4A8 /* MeViewController.swift */; };
@@ -69,6 +70,7 @@
 		450E226E1F58EE7600B4DC34 /* CreateQRCodeState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateQRCodeState.swift; sourceTree = "<group>"; };
 		450E22711F58EFA200B4DC34 /* PHPhotoLibrary+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PHPhotoLibrary+Rx.swift"; sourceTree = "<group>"; };
 		450E22741F58EFF200B4DC34 /* UIButton+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Rx.swift"; sourceTree = "<group>"; };
+		450E22761F58F75700B4DC34 /* UIImage+qrcode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+qrcode.swift"; sourceTree = "<group>"; };
 		4540C7941F4983D200AAD4E6 /* QRCodeObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeObject.swift; sourceTree = "<group>"; };
 		4546A8221F540084004BB4A8 /* Me.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Me.storyboard; sourceTree = "<group>"; };
 		4546A8231F540084004BB4A8 /* MeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeViewController.swift; sourceTree = "<group>"; };
@@ -225,6 +227,7 @@
 			children = (
 				45805CE01F400EB0000C76CA /* Base */,
 				458B4E361F36DA410069F377 /* CanGetImage.swift */,
+				450E22761F58F75700B4DC34 /* UIImage+qrcode.swift */,
 			);
 			path = "UIKit+";
 			sourceTree = "<group>";
@@ -562,6 +565,7 @@
 				450E226D1F58EE1600B4DC34 /* Result.swift in Sources */,
 				458B4E371F36DC2A0069F377 /* CanGetImage.swift in Sources */,
 				450E22721F58EFA200B4DC34 /* PHPhotoLibrary+Rx.swift in Sources */,
+				450E22771F58F75700B4DC34 /* UIImage+qrcode.swift in Sources */,
 				45805CE21F400ED6000C76CA /* BaseViewController.swift in Sources */,
 				450E22751F58EFF200B4DC34 /* UIButton+Rx.swift in Sources */,
 			);

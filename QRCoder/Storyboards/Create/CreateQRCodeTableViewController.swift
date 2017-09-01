@@ -21,11 +21,11 @@ extension CanUpdateQRCode where Self: UIViewController {
     
     func update(qrcode: CreatedQRCodeObject) {
         
-        self.present(CreateQRCodeNavigationController.self) {
-            let vc = $0.topViewController as! CreateQRCodeTableViewController
-            vc.isCreate = false
-            vc.qrcode = CreatedQRCode(codeObject: qrcode) 
-        }
+        let vc = CreateQRCodeTableViewController.fromStoryboard()
+        vc.isCreate = false
+        vc.qrcode = CreatedQRCode(codeObject: qrcode)
+        let nav = UINavigationController(rootViewController: vc)
+        self.present(nav, animated: true, completion: nil)
     }
 }
 
