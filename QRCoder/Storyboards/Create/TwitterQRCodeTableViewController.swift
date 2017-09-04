@@ -1,8 +1,8 @@
 //
-//  CreateQRCodeTableViewController.swift
+//  TwitterQRCodeTableViewController.swift
 //  QRCoder
 //
-//  Created by luojie on 2017/7/12.
+//  Created by luojie on 2017/9/4.
 //  Copyright © 2017年 LuoJie. All rights reserved.
 //
 
@@ -16,25 +16,11 @@ import RxRealm
 import RealmSwift
 import RxFeedback
 
-protocol CanUpdateQRCode {}
-extension CanUpdateQRCode where Self: UIViewController {
-    
-    func update(qrcode: CreatedQRCodeObject) {
-        
-        let vc = CreateQRCodeTableViewController.fromStoryboard()
-        vc.isCreate = false
-        vc.qrcode = CreatedQRCode(codeObject: qrcode)
-        let nav = UINavigationController(rootViewController: vc)
-        self.present(nav, animated: true, completion: nil)
-    }
-}
-
-class CreateQRCodeTableViewController: UITableViewController, IsInCreateStoryBoard, CanGetImage {
+class TwitterQRCodeTableViewController: UITableViewController, IsInCreateStoryBoard, CanGetImage {
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var textField: UITextField!
-    @IBOutlet weak var selectImageCell: UITableViewCell!
-    @IBOutlet weak var selectedImageView: UIImageView!
+    @IBOutlet weak var urlLabel: UILabel!
     @IBOutlet weak var imageViewContainerView: UIView!
     
     typealias State = CreateQRCodeState
@@ -51,13 +37,10 @@ class CreateQRCodeTableViewController: UITableViewController, IsInCreateStoryBoa
         return item
     }()
     
-    lazy var selectImage: Observable<Void> = self.tableView.rx.itemSelected
-        .filter { $0.section == 1 && $0.row == 0 }
-        .mapToVoid()
-    
     lazy var saveImage: Observable<Void> = self.tableView.rx.itemSelected
         .filter { $0.section == 3 && $0.row == 0 }
         .mapToVoid()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,18 +64,17 @@ class CreateQRCodeTableViewController: UITableViewController, IsInCreateStoryBoa
         }
         
         let bindUI: (ObservableSchedulerContext<State>) -> Observable<Event> = UI.bind(self) { me, state in
-            let centerImage = state.map { $0.qrcode.centerImageData }.map { $0.flatMap { UIImage.init(data: $0) } }.shareReplay(1)
             let subscriptions = [
-                state.map { $0.qrcode.codeText }.distinctUntilChanged().bind(to: me.textField.rx.text),
+                state.map { $0.qrcode.codeText }.distinctUntilChanged().map(TwitterURLConvertor.username).bind(to: me.textField.rx.text),
+                state.map { $0.qrcode.codeText }.distinctUntilChanged().map { $0.isEmpty ? "empty" : $0 }.bind(to: me.urlLabel.rx.text),
                 state.map { $0.qrcodeImage }.bind(to: me.imageView.rx.image(transitionType: "kCATransitionFade")),
-                centerImage.bind(to: me.selectedImageView.rx.image),
                 state.map { $0.shouldDissmis }.filterNil().bind(to: me.rx.dismiss),
                 state.map { $0.imageSaved }.filterNil().map { _ in "QRCode saved!" }.subscribe(onNext: showAlert),
                 state.map { $0.imageSaveError }.filterNil().map { "Faild to save QRCode: \($0.localizedDescription)!" }.subscribe(onNext: showAlert),
-            ]
+                ]
             let events = [
-                me.textField.rx.text.orEmpty.debounce(0.3, scheduler: MainScheduler.asyncInstance).map(Event.textChanged),
-                me.selectImage.flatMapLatest { [unowned me] _ in me.getImage() }.map(Event.imageSelected),
+                me.textField.rx.text.orEmpty.debounce(0.3, scheduler: MainScheduler.asyncInstance).map(TwitterURLConvertor.url).map(Event.textChanged),
+                Observable.just(UIImage(named: "Twitter")!).map(Event.imageSelected),
                 me.saveBarButtonItem.rx.tap.map { _ in Event.saveQRCode },
                 me.deleteBarButtonItem.rx.tap.map { _ in Event.deleteQRCode },
                 me.cancelBarButtonItem.rx.tap.map { _ in Event.cancel },
@@ -109,7 +91,7 @@ class CreateQRCodeTableViewController: UITableViewController, IsInCreateStoryBoa
             let subscriptions = [
                 state.map { $0.qrcodeToBeSave }.filterNil().map { $0.object }.subscribe(realm.rx.add(update: true)),
                 state.map { $0.qrcodeToBeDelete }.filterNil().map { realm.object(ofType: CreatedQRCodeObject.self, forPrimaryKey: $0.id) }.filterNil().subscribe(realm.rx.delete()),
-            ]
+                ]
             let events = [Observable<Event>.never()]
             return UI.Bindings(subscriptions: subscriptions, events: events)
         }
@@ -140,3 +122,21 @@ class CreateQRCodeTableViewController: UITableViewController, IsInCreateStoryBoa
             .disposed(by: disposeBag)
     }
 }
+
+fileprivate struct TwitterURLConvertor {
+    
+    private static let twitterBaseURL = "https://twitter.com/"
+    
+    fileprivate static func username(from url: String) -> String {
+        return url.hasPrefix(twitterBaseURL)
+            ? String(url.dropFirst(twitterBaseURL.count))
+            : ""
+    }
+    
+    fileprivate static func url(from username: String) -> String {
+        return username.isEmpty
+            ? ""
+            : "\(twitterBaseURL)\(username)"
+    }
+}
+

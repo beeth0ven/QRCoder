@@ -95,7 +95,7 @@ class CreatedQRCodeTableViewController: BaseTableViewController, CanUpdateQRCode
                 newState.selectedQRCode = nil
             case .indexPathSelected(let indexPath):
                 newState.selectedIndexPath = indexPath
-                newState.selectedQRCode = newState.qrcodeResults![indexPath.row]
+                newState.selectedQRCode = newState.qrcodeResults?[indexPath.row]
             }
             return newState
         }

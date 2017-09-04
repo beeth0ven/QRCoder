@@ -30,7 +30,15 @@ class ScanedQRCodeObject: QRCodeObject {
 class CreatedQRCodeObject: QRCodeObject {
     @objc dynamic var id: String = UUID().uuidString
     @objc dynamic var centerImageData: Data?
+    @objc dynamic var _kind: Int = 0
     override class func primaryKey() -> String? { return "id" }
+}
+
+extension CreatedQRCodeObject {
+    var kind: QRCodeKind {
+        get { return QRCodeKind(rawValue: _kind) ?? .text }
+        set { _kind = newValue.rawValue }
+    }
 }
 
 
@@ -40,6 +48,7 @@ struct CreatedQRCode {
     var codeText: String = ""
     var createdAt: Date = Date()
     var centerImageData: Data?
+    var kind: QRCodeKind = .text
     
     init() {
         self.id = UUID().uuidString
@@ -50,6 +59,7 @@ struct CreatedQRCode {
         self.codeText = codeObject.codeText
         self.createdAt = codeObject.createdAt
         self.centerImageData = codeObject.centerImageData
+        self.kind = codeObject.kind
     }
     
     var object: CreatedQRCodeObject {
@@ -58,6 +68,7 @@ struct CreatedQRCode {
             $0.id = self.id
             $0.createdAt = self.createdAt
             $0.centerImageData = self.centerImageData
+            $0.kind = self.kind
         }
     }
 }
