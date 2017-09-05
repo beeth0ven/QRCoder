@@ -16,6 +16,7 @@
 		4540C7951F4983D200AAD4E6 /* QRCodeObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4540C7941F4983D200AAD4E6 /* QRCodeObject.swift */; };
 		45438DBD1F5D023400DC274E /* QRCodeKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45438DBC1F5D023400DC274E /* QRCodeKind.swift */; };
 		45438DBF1F5D35FC00DC274E /* TwitterQRCodeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45438DBE1F5D35FC00DC274E /* TwitterQRCodeTableViewController.swift */; };
+		45438DC11F5D4FA400DC274E /* IsQRCodeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45438DC01F5D4FA400DC274E /* IsQRCodeTableViewController.swift */; };
 		4546A8251F5401B3004BB4A8 /* ScanedQRCodeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4546A8241F540084004BB4A8 /* ScanedQRCodeTableViewController.swift */; };
 		4546A8261F5401B9004BB4A8 /* MeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4546A8231F540084004BB4A8 /* MeViewController.swift */; };
 		4546A8271F5401C4004BB4A8 /* Me.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4546A8221F540084004BB4A8 /* Me.storyboard */; };
@@ -76,6 +77,7 @@
 		4540C7941F4983D200AAD4E6 /* QRCodeObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeObject.swift; sourceTree = "<group>"; };
 		45438DBC1F5D023400DC274E /* QRCodeKind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeKind.swift; sourceTree = "<group>"; };
 		45438DBE1F5D35FC00DC274E /* TwitterQRCodeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitterQRCodeTableViewController.swift; sourceTree = "<group>"; };
+		45438DC01F5D4FA400DC274E /* IsQRCodeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsQRCodeTableViewController.swift; sourceTree = "<group>"; };
 		4546A8221F540084004BB4A8 /* Me.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Me.storyboard; sourceTree = "<group>"; };
 		4546A8231F540084004BB4A8 /* MeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeViewController.swift; sourceTree = "<group>"; };
 		4546A8241F540084004BB4A8 /* ScanedQRCodeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanedQRCodeTableViewController.swift; sourceTree = "<group>"; };
@@ -290,6 +292,7 @@
 			isa = PBXGroup;
 			children = (
 				45DCDB3C1F160B1D00B70BCA /* Create.storyboard */,
+				45438DC01F5D4FA400DC274E /* IsQRCodeTableViewController.swift */,
 				45DCDB451F160CB900B70BCA /* CreateQRCodeTableViewController.swift */,
 				45438DBE1F5D35FC00DC274E /* TwitterQRCodeTableViewController.swift */,
 				450E226E1F58EE7600B4DC34 /* CreateQRCodeState.swift */,
@@ -555,6 +558,7 @@
 				45DCDB381F160AA500B70BCA /* MainViewController.swift in Sources */,
 				45CB5DF11F171A5600A186E7 /* QRCodeAction.swift in Sources */,
 				45DCDB421F160B3C00B70BCA /* Storyboards.swift in Sources */,
+				45438DC11F5D4FA400DC274E /* IsQRCodeTableViewController.swift in Sources */,
 				45CB5DF61F171AC900A186E7 /* QRCodeAction+URL.swift in Sources */,
 				45DCDB441F160C9C00B70BCA /* ScanQRCodeViewController.swift in Sources */,
 				4540C7951F4983D200AAD4E6 /* QRCodeObject.swift in Sources */,

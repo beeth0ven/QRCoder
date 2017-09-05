@@ -11,7 +11,7 @@ import Foundation
 enum QRCodeKind: Int {
     case appURL
     case websiteURL
-    case twiter
+    case twitter
     case phoneCall
     case email
     case text

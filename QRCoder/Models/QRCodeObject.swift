@@ -50,8 +50,9 @@ struct CreatedQRCode {
     var centerImageData: Data?
     var kind: QRCodeKind = .text
     
-    init() {
+    init(kind: QRCodeKind) {
         self.id = UUID().uuidString
+        self.kind = kind
     }
     
     init(codeObject: CreatedQRCodeObject) {
