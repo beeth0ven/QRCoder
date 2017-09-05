@@ -1,5 +1,5 @@
 //
-//  IsQRCodeTableViewController.swift
+//  IsCreateQRCodeTableViewController.swift
 //  QRCoder
 //
 //  Created by luojie on 2017/9/4.
@@ -16,12 +16,13 @@ import RxRealm
 import RealmSwift
 import RxFeedback
 
-protocol IsQRCodeTableViewController {
+protocol IsCreateQRCodeTableViewController {
     var qrcode: CreatedQRCode! { get set }
     var isCreate: Bool { get set }
     var saveImageTrigger: Observable<Void> { get }
 }
-extension IsQRCodeTableViewController where Self: UITableViewController {
+
+extension IsCreateQRCodeTableViewController where Self: UITableViewController {
     
     typealias State = CreateQRCodeState
     typealias Event = CreateQRCodeEvent

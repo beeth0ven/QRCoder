@@ -15,7 +15,7 @@ import RxFeedback
 import RxRealm
 import RealmSwift
 
-class CreatedQRCodeTableViewController: BaseTableViewController, CanUpdateQRCode {
+class CreatedQRCodeTableViewController: BaseTableViewController, CanManageQRCode {
     
     override func viewDidLoad() {
         super.viewDidLoad()

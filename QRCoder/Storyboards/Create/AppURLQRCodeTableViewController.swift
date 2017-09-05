@@ -1,5 +1,5 @@
 //
-//  CreateQRCodeTableViewController.swift
+//  AppURLQRCodeTableViewController.swift
 //  QRCoder
 //
 //  Created by luojie on 2017/7/12.
@@ -16,26 +16,7 @@ import RxRealm
 import RealmSwift
 import RxFeedback
 
-protocol CanUpdateQRCode {}
-extension CanUpdateQRCode where Self: UIViewController {
-    
-    func update(qrcode: CreatedQRCodeObject) {
-        
-        let vc: IsQRCodeTableViewController & UITableViewController
-        switch qrcode.kind {
-        case .twitter:
-            vc = TwitterQRCodeTableViewController.fromStoryboard()
-        default:
-            vc = CreateQRCodeTableViewController.fromStoryboard()
-        }
-        vc.isCreate = false
-        vc.qrcode = CreatedQRCode(codeObject: qrcode)
-        let nav = UINavigationController(rootViewController: vc)
-        self.present(nav, animated: true, completion: nil)
-    }
-}
-
-class CreateQRCodeTableViewController: UITableViewController, IsQRCodeTableViewController, IsInCreateStoryBoard, CanGetImage {
+class AppURLQRCodeTableViewController: UITableViewController, IsCreateQRCodeTableViewController, IsInCreateStoryBoard, CanGetImage {
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var textField: UITextField!
@@ -95,8 +76,6 @@ class CreateQRCodeTableViewController: UITableViewController, IsQRCodeTableViewC
         }
         
         // RxFeedback
-        
-        let qrcode: CreatedQRCode = isCreate ? CreatedQRCode(kind: .appURL) : self.qrcode!
         
         Observable.system(
             initialState: State(qrcode: qrcode),

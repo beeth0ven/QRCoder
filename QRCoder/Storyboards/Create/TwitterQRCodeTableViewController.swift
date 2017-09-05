@@ -16,7 +16,7 @@ import RxRealm
 import RealmSwift
 import RxFeedback
 
-class TwitterQRCodeTableViewController: UITableViewController, IsQRCodeTableViewController, IsInCreateStoryBoard, CanGetImage {
+class TwitterQRCodeTableViewController: UITableViewController, IsCreateQRCodeTableViewController, IsInCreateStoryBoard, CanGetImage {
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var textField: UITextField!
@@ -40,7 +40,6 @@ class TwitterQRCodeTableViewController: UITableViewController, IsQRCodeTableView
     lazy var saveImageTrigger: Observable<Void> = self.tableView.rx.itemSelected
         .filter { $0.section == 3 && $0.row == 0 }
         .mapToVoid()
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,9 +69,9 @@ class TwitterQRCodeTableViewController: UITableViewController, IsQRCodeTableView
             return UI.Bindings(subscriptions: subscriptions, events: events)
         }
         
-        let qrcode: CreatedQRCode = isCreate ? CreatedQRCode(kind: .twitter) : self.qrcode!
-        
         // RxFeedback
+        
+        let qrcode: CreatedQRCode = isCreate ? CreatedQRCode(kind: .twitter) : self.qrcode!
         
         Observable.system(
             initialState: State(qrcode: qrcode),
