@@ -8,34 +8,67 @@
 
 import UIKit
 
+private enum ManageOption {
+    case create(QRCodeKind)
+    case update(CreatedQRCodeObject)
+}
+
 protocol CanManageQRCode {}
 extension CanManageQRCode where Self: UIViewController {
     
+    func createQRCode(kind: QRCodeKind) {
+        manageQRCode(option: .create(kind))
+    }
+    
     func update(qrcode: CreatedQRCodeObject) {
+        manageQRCode(option: .update(qrcode))
+    }
+    
+    private func manageQRCode(option: ManageOption) {
         let vc: IsCreateQRCodeTableViewController & UITableViewController
-        switch qrcode.kind {
+        switch option.kind {
+        case .appURL:
+            vc = AppURLQRCodeTableViewController.fromStoryboard()
+        case .websiteURL:
+            vc = WebsiteURLQRCodeTableViewController.fromStoryboard()
         case .twitter:
             vc = TwitterQRCodeTableViewController.fromStoryboard()
+        case .text:
+            vc = TextQRCodeTableViewController.fromStoryboard()
         default:
             vc = AppURLQRCodeTableViewController.fromStoryboard()
         }
-        vc.isCreate = false
-        vc.qrcode = CreatedQRCode(codeObject: qrcode)
+        vc.isCreate = option.isCreate
+        vc.qrcode = option.qrcode
         let nav = UINavigationController(rootViewController: vc)
         self.present(nav, animated: true, completion: nil)
     }
+}
+
+extension ManageOption {
     
-    func createQRCode(kind: QRCodeKind) {
-        let vc: IsCreateQRCodeTableViewController & UITableViewController
-        switch kind {
-        case .twitter:
-            vc = TwitterQRCodeTableViewController.fromStoryboard()
-        default:
-            vc = AppURLQRCodeTableViewController.fromStoryboard()
+    var kind: QRCodeKind {
+        switch self {
+        case .create(let kind):
+            return kind
+        case .update(let object):
+            return object.kind
         }
-        vc.isCreate = true
-        vc.qrcode = CreatedQRCode(kind: kind)
-        let nav = UINavigationController(rootViewController: vc)
-        self.present(nav, animated: true, completion: nil)
+    }
+    
+    var isCreate: Bool {
+        if case .create = self {
+            return true
+        }
+        return false
+    }
+    
+    var qrcode: CreatedQRCode {
+        switch self {
+        case .create(let kind):
+            return CreatedQRCode(kind: kind)
+        case .update(let object):
+            return CreatedQRCode(codeObject: object)
+        }
     }
 }

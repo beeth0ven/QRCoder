@@ -80,3 +80,39 @@ enum CreateQRCodeEvent {
     case saveImage
     case saveImageResult(Result<Void>)
 }
+
+extension CreateQRCodeState: CustomStringConvertible {
+    
+    var description: String {
+        return
+        """
+        CreateQRCodeState(
+            qrcode: \(qrcode)
+            qrcodeImage: \(String(describing: qrcodeImage))
+            shouldDissmis: \(String(describing: shouldDissmis))
+            qrcodeToBeDelete: \(String(describing: qrcodeToBeDelete))
+            imageToBeSave: \(String(describing: imageToBeSave))
+            isSavingImage: \(isSavingImage)
+            imageSaved: \(String(describing: imageSaved))
+            imageSaveError: \(String(describing: imageSaveError))
+        )
+        """
+    }
+}
+
+//extension CreatedQRCode: CustomStringConvertible {
+//
+//    var description: String {
+//        return
+//        """
+//        CreatedQRCode(
+//            id: \(id)
+//            codeText: \(String(describing: codeText))
+//            createdAt: \(String(describing: createdAt))
+//            centerImageData: \(String(describing: centerImageData))
+//            kind: \(String(describing: kind))
+//        )
+//        """
+//    }
+//}
+

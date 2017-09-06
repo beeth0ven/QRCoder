@@ -16,7 +16,11 @@ import RxRealm
 import RealmSwift
 import RxFeedback
 
-class AppURLQRCodeTableViewController: UITableViewController, IsCreateQRCodeTableViewController, IsInCreateStoryBoard, CanGetImage {
+final class AppURLQRCodeTableViewController: QRCodeDetailTableViewController {}
+final class WebsiteURLQRCodeTableViewController: QRCodeDetailTableViewController {}
+final class TextQRCodeTableViewController: QRCodeDetailTableViewController {}
+
+class QRCodeDetailTableViewController: UITableViewController, IsCreateQRCodeTableViewController, IsInCreateStoryBoard, CanGetImage {
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var textField: UITextField!
