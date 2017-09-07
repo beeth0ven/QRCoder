@@ -33,10 +33,14 @@ extension CanManageQRCode where Self: UIViewController {
             vc = WebsiteURLQRCodeTableViewController.fromStoryboard()
         case .twitter:
             vc = TwitterQRCodeTableViewController.fromStoryboard()
+        case .phoneCall:
+            vc = PhoneCallQRCodeTableViewController.fromStoryboard()
+        case .email:
+            vc = EmailQRCodeTableViewController.fromStoryboard()
         case .text:
             vc = TextQRCodeTableViewController.fromStoryboard()
         default:
-            vc = AppURLQRCodeTableViewController.fromStoryboard()
+            fatalError("Unhandle QRCode Kind to init a viewController!")
         }
         vc.isCreate = option.isCreate
         vc.qrcode = option.qrcode

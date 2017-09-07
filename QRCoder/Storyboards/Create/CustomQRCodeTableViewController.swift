@@ -16,7 +16,12 @@ import RxRealm
 import RealmSwift
 import RxFeedback
 
-class TwitterQRCodeTableViewController: UITableViewController, IsCreateQRCodeTableViewController, IsInCreateStoryBoard, CanGetImage {
+
+class TwitterQRCodeTableViewController: CustomQRCodeTableViewController {}
+class PhoneCallQRCodeTableViewController: CustomQRCodeTableViewController {}
+class EmailQRCodeTableViewController: CustomQRCodeTableViewController {}
+
+class CustomQRCodeTableViewController: UITableViewController, IsCreateQRCodeTableViewController, IsInCreateStoryBoard, CanGetImage {
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var textField: UITextField!
@@ -48,10 +53,12 @@ class TwitterQRCodeTableViewController: UITableViewController, IsCreateQRCodeTab
         navigationItem.rightBarButtonItem = saveBarButtonItem
         
         // Bind UI
+
+        let kind = qrcode.kind
         
         let bindUI: (ObservableSchedulerContext<State>) -> Observable<Event> = UI.bind(self) { me, state in
             let subscriptions = [
-                state.map { $0.qrcode.codeText }.distinctUntilChanged().map(TwitterURLConvertor.username).bind(to: me.textField.rx.text),
+                state.map { $0.qrcode.codeText }.distinctUntilChanged().map(kind.displayName).bind(to: me.textField.rx.text),
                 state.map { $0.qrcode.codeText }.distinctUntilChanged().map { $0.isEmpty ? "empty" : $0 }.bind(to: me.urlLabel.rx.text),
                 state.map { $0.qrcodeImage }.bind(to: me.imageView.rx.image(transitionType: "kCATransitionFade")),
                 state.map { $0.shouldDissmis }.filterNil().bind(to: me.rx.dismiss),
@@ -59,8 +66,8 @@ class TwitterQRCodeTableViewController: UITableViewController, IsCreateQRCodeTab
                 state.map { $0.imageSaveError }.filterNil().map { "Faild to save QRCode: \($0.localizedDescription)!" }.subscribe(onNext: me.showAlert),
                 ]
             let events = [
-                me.textField.rx.text.orEmpty.debounce(0.3, scheduler: MainScheduler.asyncInstance).map(TwitterURLConvertor.url).map(Event.textChanged),
-                Observable.just(UIImage(named: "Twitter")!).map(Event.imageSelected),
+                me.textField.rx.text.orEmpty.debounce(0.3, scheduler: MainScheduler.asyncInstance).map(kind.codeText).map(Event.textChanged),
+                Observable.just(kind.image).map(Event.imageSelected),
                 me.saveBarButtonItem.rx.tap.map { _ in Event.saveQRCode },
                 me.deleteBarButtonItem.rx.tap.map { _ in Event.deleteQRCode },
                 me.cancelBarButtonItem.rx.tap.map { _ in Event.cancel },
@@ -70,9 +77,7 @@ class TwitterQRCodeTableViewController: UITableViewController, IsCreateQRCodeTab
         }
         
         // RxFeedback
-        
-        let qrcode: CreatedQRCode = isCreate ? CreatedQRCode(kind: .twitter) : self.qrcode!
-        
+                
         Observable.system(
             initialState: State(qrcode: qrcode),
             reduce: State.reduce,
@@ -88,20 +93,60 @@ class TwitterQRCodeTableViewController: UITableViewController, IsCreateQRCodeTab
     }
 }
 
-fileprivate struct TwitterURLConvertor {
+private extension QRCodeKind {
     
     private static let twitterBaseURL = "https://twitter.com/"
+    private static let phoneCallBaseURL = "tel:"
     
-    fileprivate static func username(from url: String) -> String {
-        return url.hasPrefix(twitterBaseURL)
-            ? String(url.dropFirst(twitterBaseURL.count))
-            : ""
+    func displayName(from codeText: String) -> String {
+        switch self {
+        case .twitter:
+            return codeText.dropFirst(text: QRCodeKind.twitterBaseURL)
+        case .phoneCall:
+            return codeText.dropFirst(text: QRCodeKind.phoneCallBaseURL)
+        default:
+            return codeText
+        }
     }
     
-    fileprivate static func url(from username: String) -> String {
-        return username.isEmpty
-            ? ""
-            : "\(twitterBaseURL)\(username)"
+    func codeText(from displayName: String) -> String {
+        switch self {
+        case .twitter:
+            return displayName.insertAtFirst(text: QRCodeKind.twitterBaseURL)
+        case .phoneCall:
+            return displayName.insertAtFirst(text: QRCodeKind.phoneCallBaseURL)
+        default:
+            return displayName
+        }
+    }
+    
+    var image: UIImage? {
+        switch self {
+        case .twitter:
+            return UIImage(named: "Twitter")
+        case .phoneCall:
+            return UIImage(named: "Phone")
+        case .email:
+            return UIImage(named: "Email")
+        default:
+            return nil
+        }
     }
 }
+
+private extension String {
+    
+    func dropFirst(text: String) -> String {
+        return self.hasPrefix(text)
+                ? String(self.dropFirst(text.count))
+                : ""
+    }
+    
+    func insertAtFirst(text: String) -> String {
+        return self.isEmpty
+            ? ""
+            : "\(text)\(self)"
+    }
+}
+
 
