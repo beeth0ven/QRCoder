@@ -17,3 +17,15 @@ enum QRCodeKind: Int {
     case text
     case gotoLocation   // Goto a place
 }
+
+extension QRCodeKind {
+    
+    init(codeText: String) {
+        switch codeText {
+        case let text where text.hasPrefix("itunes"):
+            self = .appURL
+        default:
+            self = .text
+        }
+    }
+}
