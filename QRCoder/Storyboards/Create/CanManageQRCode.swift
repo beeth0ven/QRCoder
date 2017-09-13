@@ -25,7 +25,7 @@ extension CanManageQRCode where Self: UIViewController {
     }
     
     private func manageQRCode(option: ManageOption) {
-        let vc: IsCreateQRCodeTableViewController & UITableViewController
+        var vc: IsCreateQRCodeTableViewController & UITableViewController
         switch option.kind {
         case .appURL:
             vc = AppURLQRCodeTableViewController.fromStoryboard()

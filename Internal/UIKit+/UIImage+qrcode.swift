@@ -28,7 +28,7 @@ extension UIImage {
         
         let scaleX = length / ciImage.extent.size.width
         let scaleY = length / ciImage.extent.size.height
-        let transformedImage = ciImage.applying(CGAffineTransform(scaleX: scaleX, y: scaleY))
+        let transformedImage = ciImage.transformed(by: CGAffineTransform(scaleX: scaleX, y: scaleY))
         let codeImage = UIImage(ciImage: transformedImage)
         let rect = CGRect(origin: .zero, size: codeImage.size)
         UIGraphicsBeginImageContext(codeImage.size)

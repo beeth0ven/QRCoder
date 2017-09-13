@@ -23,7 +23,3 @@ extension QRCodeObject {
         set { _kind = newValue.rawValue }
     }
 }
-
-
-
-

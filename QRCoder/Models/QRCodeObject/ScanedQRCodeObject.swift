@@ -20,3 +20,5 @@ class ScanedQRCodeObject: QRCodeObject {
     
     override class func primaryKey() -> String? { return "codeText" }
 }
+
+
