@@ -13,6 +13,10 @@
 		450E22721F58EFA200B4DC34 /* PHPhotoLibrary+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450E22711F58EFA200B4DC34 /* PHPhotoLibrary+Rx.swift */; };
 		450E22751F58EFF200B4DC34 /* UIButton+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450E22741F58EFF200B4DC34 /* UIButton+Rx.swift */; };
 		450E22771F58F75700B4DC34 /* UIImage+qrcode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450E22761F58F75700B4DC34 /* UIImage+qrcode.swift */; };
+		451750911F6A1A5000D9E3E6 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 451750901F6A1A5000D9E3E6 /* StoreKit.framework */; };
+		451750941F6A5E2800D9E3E6 /* IsStoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451750931F6A5E2800D9E3E6 /* IsStoreService.swift */; };
+		451750961F6A78A600D9E3E6 /* SKPaymentQueue+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451750951F6A78A600D9E3E6 /* SKPaymentQueue+Rx.swift */; };
+		451750981F6A7DC200D9E3E6 /* SKProductsRequest+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451750971F6A7DC200D9E3E6 /* SKProductsRequest+Rx.swift */; };
 		4540C7951F4983D200AAD4E6 /* QRCodeObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4540C7941F4983D200AAD4E6 /* QRCodeObject.swift */; };
 		45438DBD1F5D023400DC274E /* QRCodeKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45438DBC1F5D023400DC274E /* QRCodeKind.swift */; };
 		45438DBF1F5D35FC00DC274E /* CustomQRCodeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45438DBE1F5D35FC00DC274E /* CustomQRCodeTableViewController.swift */; };
@@ -78,6 +82,10 @@
 		450E22711F58EFA200B4DC34 /* PHPhotoLibrary+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PHPhotoLibrary+Rx.swift"; sourceTree = "<group>"; };
 		450E22741F58EFF200B4DC34 /* UIButton+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Rx.swift"; sourceTree = "<group>"; };
 		450E22761F58F75700B4DC34 /* UIImage+qrcode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+qrcode.swift"; sourceTree = "<group>"; };
+		451750901F6A1A5000D9E3E6 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		451750931F6A5E2800D9E3E6 /* IsStoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsStoreService.swift; sourceTree = "<group>"; };
+		451750951F6A78A600D9E3E6 /* SKPaymentQueue+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKPaymentQueue+Rx.swift"; sourceTree = "<group>"; };
+		451750971F6A7DC200D9E3E6 /* SKProductsRequest+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKProductsRequest+Rx.swift"; sourceTree = "<group>"; };
 		4540C7941F4983D200AAD4E6 /* QRCodeObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeObject.swift; sourceTree = "<group>"; };
 		45438DBC1F5D023400DC274E /* QRCodeKind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeKind.swift; sourceTree = "<group>"; };
 		45438DBE1F5D35FC00DC274E /* CustomQRCodeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomQRCodeTableViewController.swift; sourceTree = "<group>"; };
@@ -122,6 +130,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				451750911F6A1A5000D9E3E6 /* StoreKit.framework in Frameworks */,
 				C4290F464230BB9B7F674AF7 /* Pods_QRCoder.framework in Frameworks */,
 				454C51E01F16078700853A00 /* Internal.framework in Frameworks */,
 			);
@@ -160,6 +169,16 @@
 				450E22741F58EFF200B4DC34 /* UIButton+Rx.swift */,
 			);
 			path = "RxSwift+";
+			sourceTree = "<group>";
+		};
+		451750921F6A5DF200D9E3E6 /* StoreKit+ */ = {
+			isa = PBXGroup;
+			children = (
+				451750931F6A5E2800D9E3E6 /* IsStoreService.swift */,
+				451750951F6A78A600D9E3E6 /* SKPaymentQueue+Rx.swift */,
+				451750971F6A7DC200D9E3E6 /* SKProductsRequest+Rx.swift */,
+			);
+			path = "StoreKit+";
 			sourceTree = "<group>";
 		};
 		4546A8211F540084004BB4A8 /* Me */ = {
@@ -218,6 +237,7 @@
 		454C51DA1F16078600853A00 /* Internal */ = {
 			isa = PBXGroup;
 			children = (
+				451750921F6A5DF200D9E3E6 /* StoreKit+ */,
 				450E22731F58EFDC00B4DC34 /* RxSwift+ */,
 				450E22701F58EF8C00B4DC34 /* Photos+ */,
 				450E226B1F58EDE300B4DC34 /* Foundation+ */,
@@ -334,6 +354,7 @@
 		AEA2A7C7E0AC6A6E392FFEF0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				451750901F6A1A5000D9E3E6 /* StoreKit.framework */,
 				BE565DF5C356FB51B3A28A82 /* Pods_QRCoder.framework */,
 				E844BCF93FF34461A22852A4 /* Pods_Internal.framework */,
 			);
@@ -411,6 +432,11 @@
 					454C51BD1F16011400853A00 = {
 						CreatedOnToolsVersion = 9.0;
 						LastSwiftMigration = 0900;
+						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
+						};
 					};
 					454C51D81F16078600853A00 = {
 						CreatedOnToolsVersion = 9.0;
@@ -598,11 +624,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				451750961F6A78A600D9E3E6 /* SKPaymentQueue+Rx.swift in Sources */,
 				450E226D1F58EE1600B4DC34 /* Result.swift in Sources */,
 				458B4E371F36DC2A0069F377 /* CanGetImage.swift in Sources */,
 				450E22721F58EFA200B4DC34 /* PHPhotoLibrary+Rx.swift in Sources */,
+				451750981F6A7DC200D9E3E6 /* SKProductsRequest+Rx.swift in Sources */,
 				450E22771F58F75700B4DC34 /* UIImage+qrcode.swift in Sources */,
 				45805CE21F400ED6000C76CA /* BaseViewController.swift in Sources */,
+				451750941F6A5E2800D9E3E6 /* IsStoreService.swift in Sources */,
 				450E22751F58EFF200B4DC34 /* UIButton+Rx.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
