@@ -10,9 +10,34 @@ import Foundation
 import StoreKit
 import RxSwift
 import RxCocoa
+import BNKit
 
 extension Reactive where Base: SKPaymentQueue {
     
+    public func payProduct(_ product: SKProduct) -> Observable<Void> {
+        let payment = SKPayment(product: product)
+        defer { base.add(payment) }
+        return updatedTransactions
+            .map { $0.first(where: { $0.payment.productIdentifier == product.productIdentifier }) }
+            .filterNil()
+            .observeOn(MainScheduler.asyncInstance)
+            .flatMap { transaction -> Observable<Void> in
+                print("transactionState:", transaction.transactionState.rawValue)
+                switch (transaction.transactionState, transaction.error) {
+                case (.purchased, _):
+                    self.base.finishTransaction(transaction)
+                    return .just(())
+                case (.failed, let error?):
+                    print("error:", error.localizedDescription)
+                    self.base.finishTransaction(transaction)
+//                    return .empty()
+                    return .error(error)
+                default:
+                    return .empty()
+                }
+        }
+    }
+        
     public var updatedTransactions: Observable<[SKPaymentTransaction]> {
         
         return Observable.create { observer in
@@ -28,20 +53,20 @@ extension Reactive where Base: SKPaymentQueue {
         }
     }
     
-    public var removedTransactions: Observable<[SKPaymentTransaction]> {
-        
-        return Observable.create { observer in
-            
-            let paymentTransactionObserver = PaymentTransactionObserverClosures(onRemovedTransactions: { transactions in
-                observer.onNext(transactions)
-            })
-            self.base.add(paymentTransactionObserver)
-            
-            return Disposables.create {
-                self.base.remove(paymentTransactionObserver)
-            }
-        }
-    }
+//    public var removedTransactions: Observable<[SKPaymentTransaction]> {
+//
+//        return Observable.create { observer in
+//
+//            let paymentTransactionObserver = PaymentTransactionObserverClosures(onRemovedTransactions: { transactions in
+//                observer.onNext(transactions)
+//            })
+//            self.base.add(paymentTransactionObserver)
+//
+//            return Disposables.create {
+//                self.base.remove(paymentTransactionObserver)
+//            }
+//        }
+//    }
     
 }
 

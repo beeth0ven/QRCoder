@@ -48,7 +48,7 @@ extension Reactive where Base: SKProductsRequest {
     }
     
     public var response: Observable<SKProductsResponse> {
-        return delegate.responseSubject
+        return delegate.responseSubject.asObservable()
     }
     
     public var completed: Observable<Void> {

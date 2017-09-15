@@ -20,6 +20,11 @@ class ScanedQRCodeTableViewController: BaseTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        StoreService.shared.payUpgradeToProProduct()
+//            .debug("payUpgradeToProProduct")
+            .subscribe(onError: { _ in })
+            .disposed(by: disposeBag)
+        
         let tableView = self.tableView!
         
         tableView.dataSource = nil
