@@ -15,6 +15,9 @@ import BNKit
 extension Reactive where Base: SKPaymentQueue {
     
     public func payProduct(_ product: SKProduct) -> Observable<Void> {
+        guard Base.canMakePayments() else {
+            return .error(SKPaymentQueue.Error.paymentPermissionDeny)
+        }
         let payment = SKPayment(product: product)
         defer { base.add(payment) }
         return updatedTransactions
@@ -30,12 +33,26 @@ extension Reactive where Base: SKPaymentQueue {
                 case (.failed, let error?):
                     print("error:", error.localizedDescription)
                     self.base.finishTransaction(transaction)
-//                    return .empty()
                     return .error(error)
                 default:
                     return .empty()
                 }
         }
+    }
+    
+    public func restorePurchases() -> Observable<[SKPaymentTransaction]> {
+        guard Base.canMakePayments() else {
+            return .error(SKPaymentQueue.Error.paymentPermissionDeny)
+        }
+        defer { base.restoreCompletedTransactions() }
+        return updatedTransactions
+            .observeOn(MainScheduler.asyncInstance)
+            .map { transactions -> [SKPaymentTransaction] in
+                let restored = transactions.filter { $0.transactionState == .restored }
+                restored.forEach { self.base.finishTransaction($0) }
+                return restored
+        }
+        
     }
         
     public var updatedTransactions: Observable<[SKPaymentTransaction]> {

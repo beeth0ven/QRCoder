@@ -1,5 +1,5 @@
 //
-//  StoreService+.swift
+//  StoreService.swift
 //  QRCoder
 //
 //  Created by luojie on 2017/9/15.
@@ -11,19 +11,6 @@ import StoreKit
 import RxSwift
 import RxCocoa
 import Internal
-
-protocol IsStoreService {
-    
-    func isPro() -> Bool
-    func payUpgradeToProProduct() -> Observable<Void>
-    func restorePurchases() -> Observable<Void>
-}
-
-extension StoreService {
-    enum Error: Swift.Error {
-        case prodectIdUnFound(String)
-    }
-}
 
 final class StoreService {
     
@@ -52,13 +39,23 @@ extension StoreService: IsStoreService {
             }.flatMapLatest { product -> Observable<Void> in
                 return SKPaymentQueue.default().rx.payProduct(product)
             }.do(onNext: { _ in
+                print("UserDefaults.standard.set(true, forKey: StoreService.isProKey)")
                 UserDefaults.standard.set(true, forKey: StoreService.isProKey)
             })
             .take(1)
             .debug("payUpgradeToProProduct")
     }
     
-    func restorePurchases() -> Observable<Void> {
-        fatalError()
+    func restorePurchase() -> Observable<[SKPaymentTransaction]> {
+
+        return SKPaymentQueue.default().rx.restorePurchases()
+            .take(1)
+            .do(onNext: { transactions in
+                if transactions.contains(where: { $0.payment.productIdentifier == StoreService.upgradeToProProdectId }) {
+                    print("UserDefaults.standard.set(true, forKey: StoreService.isProKey)")
+                    UserDefaults.standard.set(true, forKey: StoreService.isProKey)
+                }
+            })
+        
     }
 }
