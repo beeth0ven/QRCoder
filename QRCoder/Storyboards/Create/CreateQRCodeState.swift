@@ -17,14 +17,18 @@ struct CreateQRCodeState {
     var qrcodeToBeSave: CreatedQRCode?
     var qrcodeToBeDelete: CreatedQRCode?
     
+    var isPro: Bool
+    var upgradeToProTrigger: Void?
+    
     var imageToBeSave: UIImage?
     var isSavingImage = false
     var imageSaved: Void?
     var imageSaveError: Error?
     
-    init(qrcode: CreatedQRCode) {
+    init(qrcode: CreatedQRCode, isPro: Bool) {
         self.qrcode = qrcode
         self.qrcodeImage = qrcode.image
+        self.isPro = isPro
     }
     
     private mutating func reset() {
@@ -34,6 +38,7 @@ struct CreateQRCodeState {
         imageToBeSave = nil
         imageSaved = nil
         imageSaveError = nil
+        upgradeToProTrigger = nil
     }
     
     static func reduce(state: CreateQRCodeState, event: CreateQRCodeEvent) -> CreateQRCodeState {
@@ -66,6 +71,10 @@ struct CreateQRCodeState {
         case .saveImageResult(.failure(let error)):
             newState.isSavingImage = false
             newState.imageSaveError = error
+        case .upgradeToProTrigger:
+            newState.upgradeToProTrigger = ()
+        case .didUpgradeToPro:
+            newState.isPro = true
         }
         return newState
     }
@@ -79,6 +88,8 @@ enum CreateQRCodeEvent {
     case cancel
     case saveImage
     case saveImageResult(Result<Void>)
+    case upgradeToProTrigger
+    case didUpgradeToPro
 }
 
 extension CreateQRCodeState: CustomStringConvertible {
@@ -95,6 +106,8 @@ extension CreateQRCodeState: CustomStringConvertible {
             isSavingImage: \(isSavingImage)
             imageSaved: \(String(describing: imageSaved))
             imageSaveError: \(String(describing: imageSaveError))
+            isPro: \(String(describing: isPro))
+            upgradeToPro: \(String(describing: upgradeToProTrigger))
         )
         """
     }

@@ -1,5 +1,5 @@
 //
-//  ActionFeedback.swift
+//  ActionState.swift
 //  Internal
 //
 //  Created by luojie on 2017/9/18.
@@ -38,7 +38,7 @@ public enum ActionState<Input, Output> {
     public static func system(
         inputs: Observable<Input>,
         workFactory: @escaping (Input) -> Observable<Output>,
-        scheduler: ImmediateSchedulerType
+        scheduler: ImmediateSchedulerType = MainScheduler.asyncInstance
         ) -> Observable<State> {
         
         let trigger: Feedback = { state in

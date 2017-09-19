@@ -56,7 +56,7 @@ class CustomQRCodeTableViewController: UITableViewController, IsCreateQRCodeTabl
 
         let kind = qrcode.kind
         
-        let bindUI: (ObservableSchedulerContext<State>) -> Observable<Event> = UI.bind(self) { me, state in
+        let bindUI: Feedback = UI.bind(self) { me, state in
             let subscriptions = [
                 state.map { $0.qrcode.codeText }.distinctUntilChanged().map(kind.displayName).bind(to: me.textField.rx.text),
                 state.map { $0.qrcode.codeText }.distinctUntilChanged().map { $0.isEmpty ? "empty" : $0 }.bind(to: me.urlLabel.rx.text),
@@ -79,7 +79,7 @@ class CustomQRCodeTableViewController: UITableViewController, IsCreateQRCodeTabl
         // RxFeedback
                 
         Observable.system(
-            initialState: State(qrcode: qrcode),
+            initialState: State(qrcode: qrcode, isPro: StoreService.shared.isPro()),
             reduce: State.reduce,
             scheduler: MainScheduler.asyncInstance,
             scheduledFeedback:

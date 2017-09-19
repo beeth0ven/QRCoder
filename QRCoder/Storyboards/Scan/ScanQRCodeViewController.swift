@@ -67,8 +67,6 @@ class ScanQRCodeViewController: UIViewController, IsInScanStoryBoard {
         
     }
     
-    
-    
     struct State {
         var qrcode: String?
         var qrcodeAlertViewController: QRCodeAlertViewController?

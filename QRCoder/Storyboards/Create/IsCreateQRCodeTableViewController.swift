@@ -26,6 +26,7 @@ extension IsCreateQRCodeTableViewController where Self: UITableViewController {
     
     typealias State = CreateQRCodeState
     typealias Event = CreateQRCodeEvent
+    typealias Feedback = (ObservableSchedulerContext<State>) -> Observable<Event>
     
     var showAlert: (String) -> Void {
         return { text in
@@ -33,7 +34,7 @@ extension IsCreateQRCodeTableViewController where Self: UITableViewController {
         }
     }
     
-    var saveImageTrigger: (ObservableSchedulerContext<State>) -> Observable<Event> {
+    var saveImageTrigger: Feedback {
         return {  state in
             state.flatMapLatest { [weak self]  state -> Observable<Event> in
                 if state.isSavingImage || self == nil {
@@ -44,7 +45,7 @@ extension IsCreateQRCodeTableViewController where Self: UITableViewController {
         }
     }
     
-    var bindRealm: (ObservableSchedulerContext<State>) -> Observable<Event> {
+    var bindRealm: Feedback {
         let realm = try! Realm()
         return UI.bind(self) { me, state in
             let subscriptions = [
@@ -56,11 +57,20 @@ extension IsCreateQRCodeTableViewController where Self: UITableViewController {
         }
     }
     
-    var saveImage: (ObservableSchedulerContext<State>) -> Observable<Event> {
+    var saveImage: Feedback {
         return react(query: { $0.imageToBeSave }, effects: { imageToBeSave in
             PHPhotoLibrary.shared().rx.save(imageToBeSave)
                 .mapToResult()
                 .map(Event.saveImageResult)
+        })
+    }
+    
+    var upgradeToPro: Feedback {
+        let storeService = StoreService.shared
+        return react(query: { $0.upgradeToProTrigger }, effects: { _ in
+            storeService.payUpgradeToProProduct()
+                .map { _ in Event.didUpgradeToPro }
+                .catchError { _ in .empty() }
         })
     }
 }
