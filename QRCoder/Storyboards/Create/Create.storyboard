@@ -35,7 +35,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="App Store" id="IZR-zP-0Jg">
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="AppStore" id="IZR-zP-0Jg">
                                                     <rect key="frame" x="16" y="6" width="30" height="30"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
@@ -481,6 +481,7 @@
                     <connections>
                         <outlet property="imageView" destination="WKZ-To-GKw" id="pde-R6-UUj"/>
                         <outlet property="imageViewContainerView" destination="8bg-d5-g7o" id="EK7-yy-zib"/>
+                        <outlet property="proLabel" destination="b5u-F9-oNb" id="W8T-pa-9o8"/>
                         <outlet property="selectImageCell" destination="vmE-D6-XbX" id="T9C-vU-9w5"/>
                         <outlet property="selectedImageView" destination="a8f-Vv-6vF" id="wTp-6G-iCI"/>
                         <outlet property="textField" destination="ffi-7y-qM9" id="JeN-Dm-jxo"/>
@@ -635,6 +636,7 @@
                     <connections>
                         <outlet property="imageView" destination="XbR-lc-BM3" id="yaM-C5-Ljp"/>
                         <outlet property="imageViewContainerView" destination="ok3-DH-ngY" id="38q-Lz-r6U"/>
+                        <outlet property="proLabel" destination="uGp-ee-xxX" id="ggo-Q9-K44"/>
                         <outlet property="selectImageCell" destination="FLm-lg-3S5" id="74h-Tm-x7s"/>
                         <outlet property="selectedImageView" destination="Pkm-QK-xKe" id="ExG-Zn-ZF5"/>
                         <outlet property="textField" destination="Lnb-DW-5Eu" id="pb2-N5-y20"/>
@@ -1056,7 +1058,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="App Store" width="30" height="30"/>
+        <image name="AppStore" width="30" height="30"/>
         <image name="Email" width="30" height="30"/>
         <image name="Phone" width="30" height="30"/>
         <image name="Safari" width="30" height="30"/>

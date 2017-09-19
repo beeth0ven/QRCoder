@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.17" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="jmC-qU-oSX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="jmC-qU-oSX">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -132,7 +132,7 @@
                                                             <constraint firstAttribute="width" constant="30" id="8Fp-RE-BKf"/>
                                                             <constraint firstAttribute="height" constant="30" id="ko8-3z-27h"/>
                                                         </constraints>
-                                                        <state key="normal" backgroundImage="Phone"/>
+                                                        <state key="normal" backgroundImage="Message"/>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -194,7 +194,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Phone" width="30" height="30"/>
+        <image name="Message" width="30" height="30"/>
         <image name="QR Code Filled" width="30" height="30"/>
         <image name="Tab-Camera" width="30" height="30"/>
         <image name="Tab-Camera-Fill" width="30" height="30"/>

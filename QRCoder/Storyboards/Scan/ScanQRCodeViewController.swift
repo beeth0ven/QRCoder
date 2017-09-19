@@ -99,7 +99,3 @@ class ScanQRCodeViewController: UIViewController, IsInScanStoryBoard {
         case viewWillDisappear
     }
 }
-
-class QRCodeAlertViewController: BaseViewController, IsInScanStoryBoard {
-    
-}

@@ -36,6 +36,7 @@
 		455A37EA1F626E2B004B5EAC /* ScanedQRCodeObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455A37E91F626E2B004B5EAC /* ScanedQRCodeObject.swift */; };
 		455A37EC1F626E5F004B5EAC /* CreatedQRCodeObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455A37EB1F626E5F004B5EAC /* CreatedQRCodeObject.swift */; };
 		455D5A4D1F70F2EC00E1A700 /* UITableView+deselectRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455D5A4C1F70F2EC00E1A700 /* UITableView+deselectRow.swift */; };
+		455D5A4F1F7103C400E1A700 /* QRCodeAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455D5A4E1F7103C400E1A700 /* QRCodeAlertViewController.swift */; };
 		457FECE51F6F72EC007174DF /* IsStoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457FECE41F6F72EC007174DF /* IsStoreService.swift */; };
 		457FECE71F6F7329007174DF /* StoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457FECE61F6F7329007174DF /* StoreService.swift */; };
 		457FECEB1F6F7402007174DF /* SKPaymentQueue+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457FECEA1F6F7402007174DF /* SKPaymentQueue+Error.swift */; };
@@ -115,6 +116,7 @@
 		455A37E91F626E2B004B5EAC /* ScanedQRCodeObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanedQRCodeObject.swift; sourceTree = "<group>"; };
 		455A37EB1F626E5F004B5EAC /* CreatedQRCodeObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatedQRCodeObject.swift; sourceTree = "<group>"; };
 		455D5A4C1F70F2EC00E1A700 /* UITableView+deselectRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+deselectRow.swift"; sourceTree = "<group>"; };
+		455D5A4E1F7103C400E1A700 /* QRCodeAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeAlertViewController.swift; sourceTree = "<group>"; };
 		457FECE41F6F72EC007174DF /* IsStoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsStoreService.swift; sourceTree = "<group>"; };
 		457FECE61F6F7329007174DF /* StoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreService.swift; sourceTree = "<group>"; };
 		457FECEA1F6F7402007174DF /* SKPaymentQueue+Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKPaymentQueue+Error.swift"; sourceTree = "<group>"; };
@@ -378,6 +380,7 @@
 			children = (
 				45DCDB3F1F160B2C00B70BCA /* Scan.storyboard */,
 				45DCDB431F160C9C00B70BCA /* ScanQRCodeViewController.swift */,
+				455D5A4E1F7103C400E1A700 /* QRCodeAlertViewController.swift */,
 			);
 			path = Scan;
 			sourceTree = "<group>";
@@ -676,6 +679,7 @@
 				4546A8291F540233004BB4A8 /* CreatedQRCodeTableViewController.swift in Sources */,
 				45CB5DF41F171A9F00A186E7 /* QRCodeAction+Error.swift in Sources */,
 				45438DC51F5E952500DC274E /* CreateQRCodeRootTableViewController.swift in Sources */,
+				455D5A4F1F7103C400E1A700 /* QRCodeAlertViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -123,6 +123,7 @@ class ScanedQRCodeCell: UITableViewCell {
     
     func update(with model: ScanedQRCodeObject) {
         label.text = model.codeText
+        iconButton.setImage(model.kind.image, for: .normal)
     }
 }
 

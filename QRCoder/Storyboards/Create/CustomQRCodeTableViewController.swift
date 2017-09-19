@@ -119,19 +119,6 @@ private extension QRCodeKind {
             return displayName
         }
     }
-    
-    var image: UIImage? {
-        switch self {
-        case .twitter:
-            return UIImage(named: "Twitter")
-        case .phoneCall:
-            return UIImage(named: "Phone")
-        case .email:
-            return UIImage(named: "Email")
-        default:
-            return nil
-        }
-    }
 }
 
 private extension String {

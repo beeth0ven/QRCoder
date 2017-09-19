@@ -92,3 +92,35 @@ private struct URLVerifier {
     }
 }
 
+extension QRCodeKind {
+    
+    var image: UIImage {
+        let imageName: String
+        switch self {
+        case .appURL:
+            imageName = "AppStore"
+        case .websiteURL:
+            imageName = "Safari"
+        case .twitter:
+            imageName = "Twitter"
+        case .phoneCall:
+            imageName = "Phone"
+        case .email:
+            imageName = "Email"
+        case .text:
+            imageName = "Text"
+        case .map:
+            imageName = "Map"
+        case .facetime:
+            imageName = "Facetime"
+        case .message:
+            imageName = "Message"
+        case .youtube:
+            imageName = "YouTube"
+        }
+        guard let image = UIImage(named: imageName) else {
+            fatalError("Can't get image from name: \(imageName)")
+        }
+        return image
+    }
+}
