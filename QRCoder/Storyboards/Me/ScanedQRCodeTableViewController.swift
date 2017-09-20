@@ -20,16 +20,6 @@ class ScanedQRCodeTableViewController: BaseTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        StoreService.shared.payUpgradeToProProduct()
-////            .debug("payUpgradeToProProduct")
-//            .subscribe()
-//            .disposed(by: disposeBag)
-        
-        StoreService.shared.restorePurchase()
-            .debug("restorePurchase")
-            .subscribe()
-            .disposed(by: disposeBag)
-        
         let tableView = self.tableView!
         
         tableView.dataSource = nil
@@ -42,7 +32,7 @@ class ScanedQRCodeTableViewController: BaseTableViewController {
         }
         
         let showQRCodeDetail = UIBindingObserver(UIElement: self) { (me, code: ScanedQRCodeObject) in
-            me.present(QRCodeAlertViewController.self)
+            me.present(QRCodeAlertViewController.self) { $0.codeText = code.codeText }
         }
         
         let deselectRow = UIBindingObserver(UIElement: self) { (me, indexPath: IndexPath) in

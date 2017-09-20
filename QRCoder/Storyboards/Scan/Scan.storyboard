@@ -43,7 +43,7 @@
                                                             <constraint firstAttribute="width" constant="30" id="QPz-j8-iKe"/>
                                                             <constraint firstAttribute="height" constant="30" id="zcE-Vn-jHm"/>
                                                         </constraints>
-                                                        <state key="normal" backgroundImage="QR Code Filled"/>
+                                                        <state key="normal" backgroundImage="QRCodeFilled"/>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -182,6 +182,12 @@
                             <constraint firstAttribute="trailing" secondItem="KEC-Fd-WXw" secondAttribute="trailing" id="rfh-EN-SMN"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="codeActionButton" destination="Rrl-D2-U0a" id="dMH-Dh-AuB"/>
+                        <outlet property="codeDescriptionLabel" destination="fzj-Kb-fgw" id="Iti-Di-dBT"/>
+                        <outlet property="codeIconButton" destination="fKo-ua-fI1" id="by7-Dz-nCP"/>
+                        <outlet property="codeTextLabel" destination="oFu-eO-wJF" id="AWB-V4-ouU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZyP-9D-lAT" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="TiO-ya-52f">
@@ -195,7 +201,7 @@
     </scenes>
     <resources>
         <image name="Message" width="30" height="30"/>
-        <image name="QR Code Filled" width="30" height="30"/>
+        <image name="QRCodeFilled" width="30" height="30"/>
         <image name="Tab-Camera" width="30" height="30"/>
         <image name="Tab-Camera-Fill" width="30" height="30"/>
     </resources>

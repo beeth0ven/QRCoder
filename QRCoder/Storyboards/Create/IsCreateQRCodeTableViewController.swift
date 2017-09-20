@@ -34,7 +34,7 @@ extension IsCreateQRCodeTableViewController where Self: UITableViewController {
         }
     }
     
-    var saveImageTrigger: Feedback {
+    var saveImageFeedbackTrigger: Feedback {
         return {  state in
             state.flatMapLatest { [weak self]  state -> Observable<Event> in
                 if state.isSavingImage || self == nil {

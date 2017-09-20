@@ -79,7 +79,7 @@ class ScanQRCodeViewController: UIViewController, IsInScanStoryBoard {
             case .scanedQRCode(let code):
                 if (state.isOnscreen) {
                     newState.qrcode = code
-                    newState.qrcodeAlertViewController = QRCodeAlertViewController.fromStoryboard()
+                    newState.qrcodeAlertViewController = QRCodeAlertViewController.fromStoryboard().then { $0.codeText = code }
                     newState.isOnscreen = false
                 }
             case .viewWillAppear:

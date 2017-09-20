@@ -71,7 +71,7 @@ class CustomQRCodeTableViewController: UITableViewController, IsCreateQRCodeTabl
                 me.saveBarButtonItem.rx.tap.map { _ in Event.saveQRCode },
                 me.deleteBarButtonItem.rx.tap.map { _ in Event.deleteQRCode },
                 me.cancelBarButtonItem.rx.tap.map { _ in Event.cancel },
-                me.saveImageTrigger(state)
+                me.saveImageFeedbackTrigger(state)
             ]
             return UI.Bindings(subscriptions: subscriptions, events: events)
         }

@@ -64,7 +64,7 @@ class QRCodeDetailTableViewController:
         
         // Bind UI
 
-        let selectImageOrUpgradeToPro: Feedback = { state in
+        let selectImageOrUpgradeToProFeedbackTrigger: Feedback = { state in
             state.flatMapLatest { [weak self] state -> Observable<Event> in
                 guard let me = self else { return .empty() }
                 if state.isPro {
@@ -97,7 +97,8 @@ class QRCodeDetailTableViewController:
                 me.saveBarButtonItem.rx.tap.map { _ in Event.saveQRCode },
                 me.deleteBarButtonItem.rx.tap.map { _ in Event.deleteQRCode },
                 me.cancelBarButtonItem.rx.tap.map { _ in Event.cancel },
-                me.saveImageTrigger(state)
+                me.saveImageFeedbackTrigger(state),
+                selectImageOrUpgradeToProFeedbackTrigger(state)
             ]
             return UI.Bindings(subscriptions: subscriptions, events: events)
         }
@@ -112,7 +113,6 @@ class QRCodeDetailTableViewController:
                 bindUI,
                 bindRealm,
                 saveImage,
-                selectImageOrUpgradeToPro,
                 upgradeToPro
             )
             .debug("State")
