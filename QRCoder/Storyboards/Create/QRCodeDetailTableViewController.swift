@@ -24,8 +24,7 @@ class QRCodeDetailTableViewController:
     UITableViewController,
     IsCreateQRCodeTableViewController,
     IsInCreateStoryBoard,
-    CanGetImage,
-    CanMakeChoice {
+    CanGetImage {
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var textField: UITextField!
@@ -41,7 +40,7 @@ class QRCodeDetailTableViewController:
     var isCreate = true
     
     private lazy var cancelBarButtonItem: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: nil, action: nil)
-    private lazy var saveBarButtonItem: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: nil, action: nil)
+    private lazy var doneBarButtonItem: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: nil)
     private lazy var deleteBarButtonItem: UIBarButtonItem = {
         let item = UIBarButtonItem(title: "Delete", style: .plain, target: nil, action: nil)
         item.tintColor = UIColor.red
@@ -60,10 +59,11 @@ class QRCodeDetailTableViewController:
         super.viewDidLoad()
         
         navigationItem.leftBarButtonItem = isCreate ? cancelBarButtonItem : deleteBarButtonItem
-        navigationItem.rightBarButtonItem = saveBarButtonItem
+        navigationItem.rightBarButtonItem = doneBarButtonItem
         
         // Bind UI
-
+        let alertService: IsAlertService = AlertService.shared
+        
         let selectImageOrUpgradeToProFeedbackTrigger: Feedback = { state in
             state.flatMapLatest { [weak self] state -> Observable<Event> in
                 guard let me = self else { return .empty() }
@@ -73,16 +73,15 @@ class QRCodeDetailTableViewController:
                         .map(Event.imageSelected)
                 }
                 return me.selectImageOrUpgradeToProTrigger
-                    .flatMapLatest { [unowned me] _ -> Observable<String> in
-                        me.makeChoice(message: "Upgrade to Pro version to unlock functionalities.", options: ["Cancel", "Upgrade"])
-                    }
-                    .filter { $0 == "Upgrade" }
+                    .flatMapLatest { [unowned me] _ in alertService.confirmUpgradeToProVersion(in: me) }
                     .map { _ in Event.upgradeToProTrigger }
             }
         }
         
         let bindUI: Feedback = UI.bind(self) { me, state in
-            let centerImage = state.map { $0.qrcode.centerImageData }.map { $0.flatMap { UIImage.init(data: $0) } }.shareReplay(1)
+            let centerImage = state.map { $0.qrcode.centerImageData }.map { $0.flatMap { UIImage.init(data: $0) } }
+            let confirmDelete = { [unowned me] in alertService.confirmDeleteQRCode(in: me) }
+            
             let subscriptions = [
                 state.map { $0.qrcode.codeText }.distinctUntilChanged().bind(to: me.textField.rx.text),
                 state.map { $0.qrcodeImage }.bind(to: me.imageView.rx.image(transitionType: "kCATransitionFade")),
@@ -94,8 +93,8 @@ class QRCodeDetailTableViewController:
             ]
             let events = [
                 me.textField.rx.text.orEmpty.debounce(0.3, scheduler: MainScheduler.asyncInstance).map(Event.textChanged),
-                me.saveBarButtonItem.rx.tap.map { _ in Event.saveQRCode },
-                me.deleteBarButtonItem.rx.tap.map { _ in Event.deleteQRCode },
+                me.doneBarButtonItem.rx.tap.map { _ in Event.saveQRCode },
+                me.deleteBarButtonItem.rx.tap.flatMapLatest(confirmDelete).map { _ in Event.deleteQRCode },
                 me.cancelBarButtonItem.rx.tap.map { _ in Event.cancel },
                 me.saveImageFeedbackTrigger(state),
                 selectImageOrUpgradeToProFeedbackTrigger(state)

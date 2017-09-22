@@ -28,7 +28,7 @@ class ScanedQRCodeTableViewController: BaseTableViewController {
         // Bind UI
         
         let configureCell: (Int, ScanedQRCodeObject, ScanedQRCodeCell) -> Void = { (row, model, cell) in
-            cell.update(with: model)
+            cell.updateUI(with: model)
         }
         
         let showQRCodeDetail = UIBindingObserver(UIElement: self) { (me, code: ScanedQRCodeObject) in
@@ -108,12 +108,15 @@ class ScanedQRCodeTableViewController: BaseTableViewController {
 
 class ScanedQRCodeCell: UITableViewCell {
     
-    @IBOutlet weak var label: UILabel!
-    @IBOutlet weak var iconButton: UIButton!
+    @IBOutlet private weak var label: UILabel!
+    @IBOutlet private weak var codeTextLabel: UILabel!
+    @IBOutlet private weak var iconButton: UIButton!
     
-    func update(with model: ScanedQRCodeObject) {
-        label.text = model.codeText
-        iconButton.setImage(model.kind.image, for: .normal)
+    func updateUI(with model: ScanedQRCodeObject) {
+        let viewModel = QRCodeKindViewModel(codeKind: model.kind)
+        label.text = viewModel.displayTitle
+        codeTextLabel.text = model.codeText
+        iconButton.setBackgroundImage(viewModel.image, for: .normal)
     }
 }
 

@@ -35,7 +35,7 @@ class CustomQRCodeTableViewController: UITableViewController, IsCreateQRCodeTabl
     var isCreate = true
     
     private lazy var cancelBarButtonItem: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: nil, action: nil)
-    private lazy var saveBarButtonItem: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: nil, action: nil)
+    private lazy var doneBarButtonItem: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: nil)
     private lazy var deleteBarButtonItem: UIBarButtonItem = {
         let item = UIBarButtonItem(title: "Delete", style: .plain, target: nil, action: nil)
         item.tintColor = UIColor.red
@@ -50,13 +50,15 @@ class CustomQRCodeTableViewController: UITableViewController, IsCreateQRCodeTabl
         super.viewDidLoad()
         
         navigationItem.leftBarButtonItem = isCreate ? cancelBarButtonItem : deleteBarButtonItem
-        navigationItem.rightBarButtonItem = saveBarButtonItem
+        navigationItem.rightBarButtonItem = doneBarButtonItem
         
         // Bind UI
+        let alertService: IsAlertService = AlertService.shared
 
         let kind = qrcode.kind
         
         let bindUI: Feedback = UI.bind(self) { me, state in
+            let confirmDelete: () -> Observable<Void> = { [unowned me] in alertService.confirmDeleteQRCode(in: me) }
             let subscriptions = [
                 state.map { $0.qrcode.codeText }.distinctUntilChanged().map(kind.displayName).bind(to: me.textField.rx.text),
                 state.map { $0.qrcode.codeText }.distinctUntilChanged().map { $0.isEmpty ? "empty" : $0 }.bind(to: me.urlLabel.rx.text),
@@ -67,9 +69,9 @@ class CustomQRCodeTableViewController: UITableViewController, IsCreateQRCodeTabl
                 ]
             let events = [
                 me.textField.rx.text.orEmpty.debounce(0.3, scheduler: MainScheduler.asyncInstance).map(kind.codeText).map(Event.textChanged),
-                Observable.just(kind.image).map(Event.imageSelected),
-                me.saveBarButtonItem.rx.tap.map { _ in Event.saveQRCode },
-                me.deleteBarButtonItem.rx.tap.map { _ in Event.deleteQRCode },
+                Observable.just(QRCodeKindViewModel(codeKind: kind).image).map(Event.imageSelected),
+                me.doneBarButtonItem.rx.tap.map { _ in Event.saveQRCode },
+                me.deleteBarButtonItem.rx.tap.flatMapLatest(confirmDelete).map { _ in Event.deleteQRCode },
                 me.cancelBarButtonItem.rx.tap.map { _ in Event.cancel },
                 me.saveImageFeedbackTrigger(state)
             ]

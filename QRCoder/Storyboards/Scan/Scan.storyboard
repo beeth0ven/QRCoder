@@ -112,22 +112,22 @@
                                 <blurEffect style="light"/>
                             </visualEffectView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kGw-My-z9a">
-                                <rect key="frame" x="37" y="239.5" width="300" height="188"/>
+                                <rect key="frame" x="37" y="232" width="300" height="203"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="woX-Bm-BGS">
-                                        <rect key="frame" x="15" y="15" width="270" height="158"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="woX-Bm-BGS">
+                                        <rect key="frame" x="15" y="15" width="270" height="173"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="FX6-7w-DU8">
-                                                <rect key="frame" x="0.0" y="0.0" width="270" height="61.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="270" height="64.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scan QR Code Scan QR Code Scan QR Code Scan QR Code Scan " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fzj-Kb-fgw">
-                                                        <rect key="frame" x="0.0" y="0.0" width="232" height="61.5"/>
-                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="232" height="64.5"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fKo-ua-fI1">
-                                                        <rect key="frame" x="240" y="16" width="30" height="30"/>
+                                                        <rect key="frame" x="240" y="17.5" width="30" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="30" id="8Fp-RE-BKf"/>
                                                             <constraint firstAttribute="height" constant="30" id="ko8-3z-27h"/>
@@ -137,14 +137,15 @@
                                                 </subviews>
                                             </stackView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tel15342299921Tel15342299921Te15342299921Tel: 15342299921Tel: 15342299921Tel: 15342299921Tel: 15342299921" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oFu-eO-wJF">
-                                                <rect key="frame" x="0.0" y="71.5" width="270" height="46.5"/>
+                                                <rect key="frame" x="0.0" y="79.5" width="270" height="46.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                 <color key="textColor" red="0.51784205436706543" green="0.58159953355789185" blue="0.58617168664932251" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rrl-D2-U0a">
-                                                <rect key="frame" x="0.0" y="128" width="270" height="30"/>
+                                                <rect key="frame" x="0.0" y="141" width="270" height="32"/>
                                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <state key="normal" title="Make a phone call">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>

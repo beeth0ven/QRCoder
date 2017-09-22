@@ -44,11 +44,12 @@ class QRCodeAlertViewController: BaseViewController, IsInScanStoryBoard {
         
         // Bind Realm
         let realm = try! Realm()
+        let codeText = self.codeText
 
         let bindRealm: Feedback = { state in
             Observable<Int>.timer(0.1, scheduler: MainScheduler.instance)
-                .map { [weak self] _ -> Event in
-                    let maybeQrcode = self?.codeText.flatMap { realm.object(ofType: ScanedQRCodeObject.self, forPrimaryKey: $0) }
+                .map { _ -> Event in
+                    let maybeQrcode = codeText.flatMap { realm.object(ofType: ScanedQRCodeObject.self, forPrimaryKey: $0) }
                     return Event.maybeQrcode(maybeQrcode)
             }
         }
@@ -70,32 +71,11 @@ class QRCodeAlertViewController: BaseViewController, IsInScanStoryBoard {
     
     private var qrcodeBinder: UIBindingObserver<QRCodeAlertViewController, ScanedQRCodeObject> {
         return UIBindingObserver(UIElement: self) { (me, qrcode) in
-            me.codeDescriptionLabel.text = "Make a phone call to 898646"
-            me.codeActionButton.setTitle("Mak a phone call 1", for: .normal)
-            switch qrcode.kind {
-            case .text:
-                break
-            case .appURL:
-                break
-            case .websiteURL:
-                break
-            case .twitter:
-                break
-            case .phoneCall:
-                break
-            case .email:
-                break
-            case .map:
-                break
-            case .facetime:
-                break
-            case .message:
-                break
-            case .youtube:
-                break
-            }
+            let viewModel = QRCodeKindViewModel(codeKind: qrcode.kind)
+            me.codeDescriptionLabel.text = viewModel.displayTitle
+            me.codeActionButton.setTitle(viewModel.actionTitle, for: .normal)
             me.codeTextLabel.text = qrcode.codeText
-            me.codeIconButton.setBackgroundImage(qrcode.kind.image, for: .normal)
+            me.codeIconButton.setBackgroundImage(viewModel.image, for: .normal)
         }
     }
     
@@ -109,7 +89,7 @@ class QRCodeAlertViewController: BaseViewController, IsInScanStoryBoard {
             case .appURL, .websiteURL, .twitter, .phoneCall, .email, .map, .facetime, .message, .youtube:
                 let application = UIApplication.shared
                 guard let url = URL(string: qrcode.codeText), application.canOpenURL(url) else {
-                    TipView.show(state: .textOnly("Can't take action with the url!"), delayDismiss: 2)
+                    TipView.show(state: .textOnly("Can't take action with the url: \(qrcode.codeText)"), delayDismiss: 2)
                     return
                 }
                 application.open(url)
