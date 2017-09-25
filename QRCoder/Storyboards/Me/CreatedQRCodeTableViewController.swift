@@ -25,9 +25,9 @@ class CreatedQRCodeTableViewController: BaseTableViewController, CanManageQRCode
         tableView.dataSource = nil
         tableView.delegate = nil
         
-//        let configureCell: (Int, ScanedQRCode, UITableViewCell) -> Void = { (row, model, cell) in
-//            cell.textLabel?.text = model.codeText
-//        }
+        let configureCell: (Int, CreatedQRCodeObject, QRCodeCell) -> Void = { (row, model, cell) in
+            cell.updateUI(with: model)
+        }
         
         let updateQRCode = UIBindingObserver(UIElement: self) { (me, code: CreatedQRCodeObject) in
             me.update(qrcode: code)
@@ -39,9 +39,7 @@ class CreatedQRCodeTableViewController: BaseTableViewController, CanManageQRCode
         
         let bindUI: (ObservableSchedulerContext<State>) -> Observable<Event> = UI.bind(self) { me, state in
             let subscriptions = [
-                state.map { $0.qrcodeResults }.filterNil().bind(to: me.tableView.rx.items(), curriedArgument: { (row, model, cell) in
-                    cell.textLabel?.text = model.codeText
-                }),
+                state.map { $0.qrcodeResults }.filterNil().bind(to: me.tableView.rx.items(), curriedArgument: configureCell),
                 state.map { $0.selectedIndexPath }.filterNil().bind(to: deselectRow),
                 state.map { $0.selectedQRCode }.filterNil().bind(to: updateQRCode)
             ]

@@ -54,7 +54,11 @@ struct CreateQRCodeState {
             newState.qrcodeImage = newState.qrcode.image
         case .saveQRCode:
             newState.shouldDissmis = ()
-            newState.qrcodeToBeSave = newState.qrcode
+            if !newState.qrcode.codeText.isEmpty {
+                newState.qrcodeToBeSave = newState.qrcode
+            } else {
+                newState.qrcodeToBeDelete = newState.qrcode
+            }
         case .deleteQRCode:
             newState.shouldDissmis = ()
             newState.qrcodeToBeDelete = newState.qrcode

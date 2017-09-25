@@ -71,25 +71,25 @@ struct QRCodeKindViewModel {
     var actionTitle: String {
         switch codeKind {
         case .text:
-            return "Copy It"
+            return "Copy it"
         case .appURL:
-            return "Download The App"
+            return "Download the App"
         case .websiteURL:
-            return "Goto The Website"
+            return "Go to the website"
         case .twitter:
-            return "Visit The Home Page"
+            return "Visit the homepage"
         case .phoneCall:
-            return "Mak A Phone Call"
+            return "Mak a phone call"
         case .email:
-            return "Send Mail To Him Or Her"
+            return "Send mail to him or her"
         case .map:
-            return "Go To The Place"
+            return "Go to the place"
         case .facetime:
-            return "Mak A Facetime Call"
+            return "Make a facetime call"
         case .message:
-            return "Send Message To Him Or Her"
+            return "Send message to him or her"
         case .youtube:
-            return "Watch The Video"
+            return "Watch the video"
         }
     }
 }

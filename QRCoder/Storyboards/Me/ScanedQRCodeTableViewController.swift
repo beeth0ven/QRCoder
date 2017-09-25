@@ -27,7 +27,7 @@ class ScanedQRCodeTableViewController: BaseTableViewController {
         
         // Bind UI
         
-        let configureCell: (Int, ScanedQRCodeObject, ScanedQRCodeCell) -> Void = { (row, model, cell) in
+        let configureCell: (Int, ScanedQRCodeObject, QRCodeCell) -> Void = { (row, model, cell) in
             cell.updateUI(with: model)
         }
         
@@ -41,7 +41,7 @@ class ScanedQRCodeTableViewController: BaseTableViewController {
         
         let bindUI: (ObservableSchedulerContext<State>) -> Observable<Event> = UI.bind(self) { me, state in
             let subscriptions = [
-                state.map { $0.qrcodeResults }.filterNil().bind(to: me.tableView.rx.items(cellType: ScanedQRCodeCell.self), curriedArgument: configureCell),
+                state.map { $0.qrcodeResults }.filterNil().bind(to: me.tableView.rx.items(cellType: QRCodeCell.self), curriedArgument: configureCell),
                 state.map { $0.selectedIndexPath }.filterNil().bind(to: deselectRow),
                 state.map { $0.selectedQRCode }.filterNil().bind(to: showQRCodeDetail)
             ]
@@ -106,13 +106,13 @@ class ScanedQRCodeTableViewController: BaseTableViewController {
     }
 }
 
-class ScanedQRCodeCell: UITableViewCell {
+class QRCodeCell: UITableViewCell {
     
     @IBOutlet private weak var label: UILabel!
     @IBOutlet private weak var codeTextLabel: UILabel!
     @IBOutlet private weak var iconButton: UIButton!
     
-    func updateUI(with model: ScanedQRCodeObject) {
+    func updateUI(with model: QRCodeObject) {
         let viewModel = QRCodeKindViewModel(codeKind: model.kind)
         label.text = viewModel.displayTitle
         codeTextLabel.text = model.codeText

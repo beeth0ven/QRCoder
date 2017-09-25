@@ -31,9 +31,9 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="pY5-Pj-QNv">
                                                 <rect key="frame" x="15" y="15" width="345" height="40.5"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scan QR Code Scan QR Code Scan QR Code Scan QR Code Scan " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1QH-aa-Udm">
-                                                        <rect key="frame" x="0.0" y="0.0" width="307" height="40.5"/>
-                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please scan the QRCode" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1QH-aa-Udm">
+                                                        <rect key="frame" x="0.0" y="10" width="307" height="20.5"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -206,4 +206,5 @@
         <image name="Tab-Camera" width="30" height="30"/>
         <image name="Tab-Camera-Fill" width="30" height="30"/>
     </resources>
+    <color key="tintColor" red="0.53409618139266968" green="0.59629547595977783" blue="0.81492191553115845" alpha="1" colorSpace="calibratedRGB"/>
 </document>

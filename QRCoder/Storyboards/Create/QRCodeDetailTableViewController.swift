@@ -118,4 +118,5 @@ class QRCodeDetailTableViewController:
             .subscribe()
             .disposed(by: disposeBag)
     }
+    
 }

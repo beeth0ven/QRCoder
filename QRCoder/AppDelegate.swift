@@ -7,10 +7,16 @@
 //
 
 import UIKit
+import BNKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
+        window?.tintColor = UIColor.flatPowerBlueDark
+        return true
+    }
 }
 
