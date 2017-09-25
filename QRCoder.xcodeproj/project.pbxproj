@@ -45,6 +45,7 @@
 		457FECF41F70E7E7007174DF /* UIAlertController+Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457FECF31F70E7E7007174DF /* UIAlertController+Builder.swift */; };
 		45805CE21F400ED6000C76CA /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45805CE11F400ED6000C76CA /* BaseViewController.swift */; };
 		458B4E371F36DC2A0069F377 /* CanGetImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458B4E361F36DA410069F377 /* CanGetImage.swift */; };
+		45C095A51F78DFD10058B23A /* UIResponder+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C095A41F78DFD00058B23A /* UIResponder+Rx.swift */; };
 		45D573C81F721A1D009E669F /* IsRxFeedbackState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D573C71F721A1D009E669F /* IsRxFeedbackState.swift */; };
 		45D573CB1F74B723009E669F /* QRCodeKindViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D573CA1F74B723009E669F /* QRCodeKindViewModel.swift */; };
 		45D573CE1F74EA0B009E669F /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D573CD1F74EA0B009E669F /* AlertService.swift */; };
@@ -126,6 +127,7 @@
 		457FECF31F70E7E7007174DF /* UIAlertController+Builder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Builder.swift"; sourceTree = "<group>"; };
 		45805CE11F400ED6000C76CA /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		458B4E361F36DA410069F377 /* CanGetImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanGetImage.swift; sourceTree = "<group>"; };
+		45C095A41F78DFD00058B23A /* UIResponder+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIResponder+Rx.swift"; sourceTree = "<group>"; };
 		45CB5DF71F1723C300A186E7 /* QRCoder-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "QRCoder-Bridging-Header.h"; sourceTree = "<group>"; };
 		45D573C71F721A1D009E669F /* IsRxFeedbackState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsRxFeedbackState.swift; sourceTree = "<group>"; };
 		45D573CA1F74B723009E669F /* QRCodeKindViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeKindViewModel.swift; sourceTree = "<group>"; };
@@ -318,6 +320,7 @@
 				450E226C1F58EE1600B4DC34 /* Result.swift */,
 				455D5A4C1F70F2EC00E1A700 /* UITableView+deselectRow.swift */,
 				457FECF31F70E7E7007174DF /* UIAlertController+Builder.swift */,
+				45C095A41F78DFD00058B23A /* UIResponder+Rx.swift */,
 			);
 			path = "BNKit+";
 			sourceTree = "<group>";
@@ -694,6 +697,7 @@
 				455D5A4D1F70F2EC00E1A700 /* UITableView+deselectRow.swift in Sources */,
 				450E226D1F58EE1600B4DC34 /* Result.swift in Sources */,
 				458B4E371F36DC2A0069F377 /* CanGetImage.swift in Sources */,
+				45C095A51F78DFD10058B23A /* UIResponder+Rx.swift in Sources */,
 				450E22721F58EFA200B4DC34 /* PHPhotoLibrary+Rx.swift in Sources */,
 				451750981F6A7DC200D9E3E6 /* SKProductsRequest+Rx.swift in Sources */,
 				450E22771F58F75700B4DC34 /* UIImage+qrcode.swift in Sources */,

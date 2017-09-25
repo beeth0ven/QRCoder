@@ -15,7 +15,9 @@ import RxFeedback
 import RxRealm
 import RealmSwift
 
-class ScanedQRCodeTableViewController: BaseTableViewController {
+final class ScanedQRCodeTableViewController: BaseTableViewController {
+    
+    @IBOutlet private var emptyView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +27,24 @@ class ScanedQRCodeTableViewController: BaseTableViewController {
         tableView.dataSource = nil
         tableView.delegate = nil
         
-        // Bind UI
+        Observable.system(
+            initialState: State(),
+            reduce: State.reduce,
+            scheduler: MainScheduler.instance,
+            scheduledFeedback:
+                uiFeedback,
+                realmFeedback
+            )
+            //            .debug("State")
+            .subscribe()
+            .disposed(by: disposeBag)
+        
+        tableView.rx.modelDeleted(ScanedQRCodeObject.self)
+            .subscribe(Realm.rx.delete())
+            .disposed(by: disposeBag)
+    }
+    
+    private var uiFeedback: State.Feedback {
         
         let configureCell: (Int, ScanedQRCodeObject, QRCodeCell) -> Void = { (row, model, cell) in
             cell.updateUI(with: model)
@@ -39,47 +58,36 @@ class ScanedQRCodeTableViewController: BaseTableViewController {
             me.tableView.deselectRow(at: indexPath, animated: true)
         }
         
-        let bindUI: (ObservableSchedulerContext<State>) -> Observable<Event> = UI.bind(self) { me, state in
+        let emptyViewIsShowed = UIBindingObserver(UIElement: self) { (me, isShowed: Bool) in
+            me.tableView.backgroundView = isShowed ? me.emptyView : nil
+        }
+        
+        return UI.bind(self) { me, state in
             let subscriptions = [
-                state.map { $0.qrcodeResults }.filterNil().bind(to: me.tableView.rx.items(cellType: QRCodeCell.self), curriedArgument: configureCell),
+                state.map { $0.qrcodeResults }.filterNil().bind(to: me.tableView.rx.items(), curriedArgument: configureCell),
                 state.map { $0.selectedIndexPath }.filterNil().bind(to: deselectRow),
-                state.map { $0.selectedQRCode }.filterNil().bind(to: showQRCodeDetail)
+                state.map { $0.selectedQRCode }.filterNil().bind(to: showQRCodeDetail),
+                state.map { $0.qrcodeResults }.filterNil().map { $0.isEmpty }.bind(to: emptyViewIsShowed)
             ]
             let events = [
                 me.tableView.rx.itemSelected.map(Event.indexPathSelected)
             ]
             return UI.Bindings(subscriptions: subscriptions, events: events)
         }
-        
-        // Bind Realm
-        
-        let bindRealm: (ObservableSchedulerContext<State>) -> Observable<Event>  = { _ in
+    }
+    
+    private var realmFeedback: State.Feedback {
+        return { _ in
             let realm = try! Realm()
             let objects = realm.objects(ScanedQRCodeObject.self)
                 .sorted(byKeyPath: "createdAt", ascending: false)
             return Observable.collection(from: objects).map(Event.qrcodeResults)
         }
-        
-        // System
-        
-        Observable.system(
-            initialState: State(),
-            reduce: State.reduce,
-            scheduler: MainScheduler.instance,
-            scheduledFeedback:
-                bindUI,
-                bindRealm
-            )
-            //            .debug("State")
-            .subscribe()
-            .disposed(by: disposeBag)
-        
-        tableView.rx.modelDeleted(ScanedQRCodeObject.self)
-            .subscribe(Realm.rx.delete())
-            .disposed(by: disposeBag)
     }
     
     struct State {
+        typealias Feedback = (ObservableSchedulerContext<State>) -> Observable<Event>
+        
         var qrcodeResults: Results<ScanedQRCodeObject>!
         var selectedIndexPath: IndexPath?
         var selectedQRCode: ScanedQRCodeObject?

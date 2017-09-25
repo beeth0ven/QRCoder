@@ -40,10 +40,7 @@ extension UIAlertController {
         }
         
         public func showAlert(in viewController: UIViewController) -> Observable<String> {
-            let title = self.title
-            let message = self.message
-            let preferredStyle = self.preferredStyle
-            let options = self.options
+            let (title, message, preferredStyle, options) = (self.title, self.message, self.preferredStyle, self.options)
             
             return Observable.create { [weak viewController] (observer) in
                 guard let viewController = viewController else { return Disposables.create() }

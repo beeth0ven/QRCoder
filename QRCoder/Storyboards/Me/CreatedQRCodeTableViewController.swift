@@ -17,6 +17,8 @@ import RealmSwift
 
 class CreatedQRCodeTableViewController: BaseTableViewController, CanManageQRCode {
     
+    @IBOutlet private var emptyView: UIView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,11 +39,16 @@ class CreatedQRCodeTableViewController: BaseTableViewController, CanManageQRCode
             me.tableView.deselectRow(at: indexPath, animated: true)
         }
         
+        let emptyViewIsShowed = UIBindingObserver(UIElement: self) { (me, isShowed: Bool) in
+            me.tableView.backgroundView = isShowed ? me.emptyView : nil
+        }
+        
         let bindUI: (ObservableSchedulerContext<State>) -> Observable<Event> = UI.bind(self) { me, state in
             let subscriptions = [
                 state.map { $0.qrcodeResults }.filterNil().bind(to: me.tableView.rx.items(), curriedArgument: configureCell),
                 state.map { $0.selectedIndexPath }.filterNil().bind(to: deselectRow),
-                state.map { $0.selectedQRCode }.filterNil().bind(to: updateQRCode)
+                state.map { $0.selectedQRCode }.filterNil().bind(to: updateQRCode),
+                state.map { $0.qrcodeResults }.filterNil().map { $0.isEmpty }.bind(to: emptyViewIsShowed)
             ]
             let events = [
                 me.tableView.rx.itemSelected.map(Event.indexPathSelected)

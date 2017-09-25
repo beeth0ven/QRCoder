@@ -66,6 +66,7 @@ class CustomQRCodeTableViewController: UITableViewController, IsCreateQRCodeTabl
                 state.map { $0.shouldDissmis }.filterNil().bind(to: me.rx.dismiss),
                 state.map { $0.imageSaved }.filterNil().map { _ in "QRCode saved!" }.subscribe(onNext: me.showAlert),
                 state.map { $0.imageSaveError }.filterNil().map { "Faild to save QRCode: \($0.localizedDescription)!" }.subscribe(onNext: me.showAlert),
+                me.rx.viewDidAppear.take(1).bind(to: me.textField.rx.becomeFirstResponder)
                 ]
             let events = [
                 me.textField.rx.text.orEmpty.debounce(0.3, scheduler: MainScheduler.asyncInstance).map(kind.codeText).map(Event.textChanged),
@@ -92,8 +93,11 @@ class CustomQRCodeTableViewController: UITableViewController, IsCreateQRCodeTabl
             .debug("State")
             .subscribe()
             .disposed(by: disposeBag)
+        
+        
     }
 }
+
 
 private extension QRCodeKind {
     

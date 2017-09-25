@@ -84,7 +84,7 @@ private struct URLVerifier {
     }
     
     public static func isApppURL(_ text: String) -> Bool {
-        return ["https://itunes.apple.com:"].contains { text.hasPrefix($0) }
+        return ["https://itunes.apple.com"].contains { text.hasPrefix($0) }
     }
     
     public static func isWebsiteURL(_ text: String) -> Bool {

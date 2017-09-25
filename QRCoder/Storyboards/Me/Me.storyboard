@@ -200,8 +200,28 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Scaned QRCodes" id="L3g-7D-1OP"/>
+                    <connections>
+                        <outlet property="emptyView" destination="dK9-wp-lKd" id="kpa-lf-GH7"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9gc-cd-mR7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="dK9-wp-lKd">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Empty" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cx5-Qz-hsT">
+                            <rect key="frame" x="78.5" y="46.5" width="83" height="36"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                            <color key="textColor" red="0.42655369639396667" green="0.47584608197212219" blue="0.48026475310325623" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="Cx5-Qz-hsT" firstAttribute="centerY" secondItem="dK9-wp-lKd" secondAttribute="centerY" id="6YC-rW-ih0"/>
+                        <constraint firstItem="Cx5-Qz-hsT" firstAttribute="centerX" secondItem="dK9-wp-lKd" secondAttribute="centerX" id="Bac-S2-dNH"/>
+                    </constraints>
+                </view>
             </objects>
             <point key="canvasLocation" x="1425" y="-525"/>
         </scene>
@@ -281,7 +301,27 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Created QRCodes" id="uaZ-a6-hDz"/>
+                    <connections>
+                        <outlet property="emptyView" destination="Zd5-We-stJ" id="ixL-EX-6uC"/>
+                    </connections>
                 </tableViewController>
+                <view contentMode="scaleToFill" id="Zd5-We-stJ">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Empty" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FBv-5K-oHu">
+                            <rect key="frame" x="78.5" y="46.5" width="83" height="36"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                            <color key="textColor" red="0.42655369640000002" green="0.475846082" blue="0.4802647531" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="FBv-5K-oHu" firstAttribute="centerY" secondItem="Zd5-We-stJ" secondAttribute="centerY" id="oBN-3r-h8A"/>
+                        <constraint firstItem="FBv-5K-oHu" firstAttribute="centerX" secondItem="Zd5-We-stJ" secondAttribute="centerX" id="vXw-E5-jtR"/>
+                    </constraints>
+                </view>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M7i-eO-I0w" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1425" y="132"/>
