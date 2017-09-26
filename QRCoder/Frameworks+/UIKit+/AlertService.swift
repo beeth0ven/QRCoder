@@ -36,4 +36,13 @@ extension AlertService: IsAlertService {
             .filter { $0 == "Delete" }
             .mapToVoid()
     }
+    
+    func gotoAppStoreAndShowCurrentApp() -> UIBindingObserver<UIApplication, Void> {
+        return UIBindingObserver(UIElement: UIApplication.shared) { (application, _) in
+            if let url = URL(string: "https://itunes.apple.com/us/app/qrcode-scan-create/id1258476173?ls=1&mt=8")
+                , application.canOpenURL(url) {
+                application.open(url)
+            }
+        }
+    }
 }

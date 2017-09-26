@@ -21,6 +21,10 @@ class MeViewController: UITableViewController {
         .filter { $0.section == 2 && $0.row == 0 }
         .mapToVoid()
     
+    private lazy var feedbackTrigger: Observable<Void> = self.tableView.rx.itemSelected
+        .filter { $0.section == 3 && $0.row == 0 }
+        .mapToVoid()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -35,6 +39,10 @@ class MeViewController: UITableViewController {
         
         tableView.rx.itemSelected
             .bind(to: tableView.rx.deselectRow())
+            .disposed(by: disposeBag)
+        
+        feedbackTrigger
+            .bind(to: AlertService.shared.gotoAppStoreAndShowCurrentApp())
             .disposed(by: disposeBag)
     }
     

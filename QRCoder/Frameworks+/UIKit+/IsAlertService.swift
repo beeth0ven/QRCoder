@@ -14,4 +14,5 @@ import Internal
 protocol IsAlertService {
     func confirmUpgradeToProVersion(in viewController: UIViewController) -> Observable<Void>
     func confirmDeleteQRCode(in viewController: UIViewController) -> Observable<Void>
+    func gotoAppStoreAndShowCurrentApp() -> UIBindingObserver<UIApplication, Void> 
 }
