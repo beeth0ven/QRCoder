@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.90823972230000005" green="0.92638683320000004" blue="0.93171715740000005" alpha="1" colorSpace="calibratedRGB"/>
                         <sections>
-                            <tableViewSection footerTitle="" id="qKA-SS-2TZ">
+                            <tableViewSection footerTitle="We can use it to promote our Apps" id="qKA-SS-2TZ">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="koO-9f-4LW" imageView="IZR-zP-0Jg" style="IBUITableViewCellStyleDefault" id="aky-WY-r6Q">
                                         <rect key="frame" x="0.0" y="35" width="375" height="44"/>
@@ -44,10 +44,10 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection footerTitle="" id="otd-xc-FFO">
+                            <tableViewSection footerTitle="This QRCode makes it easier for users to visit the website" id="otd-xc-FFO">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="TE8-S4-SX8" imageView="hgJ-eX-rR1" style="IBUITableViewCellStyleDefault" id="roY-pB-FfH">
-                                        <rect key="frame" x="0.0" y="115" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="127" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="roY-pB-FfH" id="WP5-z2-8TR">
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
@@ -69,10 +69,10 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection footerTitle="" id="crL-5I-Kmc">
+                            <tableViewSection footerTitle="It's easier to visit our twitter home page by scan the QRCode" id="crL-5I-Kmc">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="Y1T-qD-wR9" imageView="exr-xV-agA" style="IBUITableViewCellStyleDefault" id="yJw-Tz-s6y">
-                                        <rect key="frame" x="0.0" y="195" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="235" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yJw-Tz-s6y" id="OfZ-qi-o7b">
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
@@ -94,10 +94,11 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection footerTitle="E.g. When someone want to move my car, scan this to give me a phone call" id="Up0-P9-hbV">
+                            <tableViewSection id="Up0-P9-hbV">
+                                <string key="footerTitle">In some cases, others can contact you more quickly. E.g. We can paste QRCode on the pet, so that other people can easily contact the pet's owner.</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="9aC-JV-pYW" imageView="353-wC-FVK" style="IBUITableViewCellStyleDefault" id="nrr-NM-oyA">
-                                        <rect key="frame" x="0.0" y="275" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="343" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nrr-NM-oyA" id="5FK-Nd-bDZ">
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
@@ -119,10 +120,10 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection footerTitle="E.g. iOS and Android device can scan this QRCode to join Wifi" id="f2X-Bc-2me">
+                            <tableViewSection footerTitle="In some formal occasions, if others can send mail by scanning QRCode, it will facilitate others" id="f2X-Bc-2me">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="IQJ-0Q-4Rk" imageView="fKs-6Y-zg4" style="IBUITableViewCellStyleDefault" id="zQn-CP-PeQ">
-                                        <rect key="frame" x="0.0" y="383" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="467" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zQn-CP-PeQ" id="Dpy-VT-bUH">
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
@@ -144,10 +145,10 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection footerTitle="E.g. My customer can route to my shop by scan this QRCode " id="UNH-Ao-y9G">
+                            <tableViewSection footerTitle="In any other case we can use this kind of QRCode" id="UNH-Ao-y9G">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="KiM-qt-Ahl" imageView="Apc-jD-kyR" style="IBUITableViewCellStyleDefault" id="aF8-Ed-wdu">
-                                        <rect key="frame" x="0.0" y="491" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="575" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aF8-Ed-wdu" id="sEj-dD-CgA">
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>

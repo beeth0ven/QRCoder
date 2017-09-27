@@ -43,7 +43,10 @@ extension UIAlertController {
             let (title, message, preferredStyle, options) = (self.title, self.message, self.preferredStyle, self.options)
             
             return Observable.create { [weak viewController] (observer) in
-                guard let viewController = viewController else { return Disposables.create() }
+                guard let viewController = viewController else {
+                    observer.onCompleted()
+                    return Disposables.create()
+                }
                 let alertController = UIAlertController(title: title, message: message, preferredStyle: preferredStyle)
                 options
                     .map { option in
